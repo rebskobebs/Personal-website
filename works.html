@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Sparsh Adhikari</title>
+  <script>if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');</script>
+  <link rel="icon" href="assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/site.css" rel="stylesheet">
+  <style>
+    .page-head {
+      padding: 64px 48px 48px;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 48px;
+      align-items: end;
+    }
+
+    .page-head-right {
+      font-size: 0.92rem;
+      color: var(--muted2);
+      line-height: 1.75;
+    }
+
+    .project-tabs {
+      padding: 18px 48px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+    }
+
+    .tab-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border2);
+      border-radius: 999px;
+      padding: 7px 13px;
+      color: var(--muted2);
+      font-size: 0.78rem;
+      text-decoration: none;
+      background: var(--bg);
+    }
+
+    .tab-chip i {
+      color: var(--amber);
+    }
+
+    .project-section {
+      padding: 64px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 52px;
+    }
+
+    .section-note {
+      color: var(--muted2);
+      font-size: 0.9rem;
+      line-height: 1.75;
+      margin-top: 12px;
+    }
+
+    .project-list {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .project-card:hover .project-title {
+      color: var(--amber);
+    }
+
+    .project-kicker {
+      color: var(--muted);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .project-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+      line-height: 1.2;
+      transition: color 0.18s var(--ease);
+    }
+
+    .project-desc {
+      color: var(--muted2);
+      font-size: 0.92rem;
+      line-height: 1.75;
+      max-width: 720px;
+      margin-top: 10px;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transform: translateY(6px);
+      transition: max-height 0.28s var(--ease), opacity 0.18s var(--ease), transform 0.18s var(--ease);
+    }
+
+    .project-card:hover .project-desc,
+    .project-card:focus-visible .project-desc {
+      max-height: 140px;
+      opacity: 1;
+      transform: none;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 16px;
+    }
+
+    .project-status {
+      align-self: start;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      white-space: nowrap;
+      padding-top: 6px;
+    }
+
+    .project-status::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .project-status.live {
+      color: var(--teal);
+    }
+
+    .project-status.planned {
+      color: var(--amber);
+    }
+
+    @media (max-width: 860px) {
+      .page-head,
+      .section-shell {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .page-head,
+      .project-tabs,
+      .project-section {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .project-card {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .project-desc {
+        max-height: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="site-nav">
+    <a href="index.html" class="nav-logo">SA</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#projects" class="active">Projects</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#experience">Experience</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><i class="bi bi-moon"></i></button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><i class="bi bi-list"></i></button>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="page-head">
+      <div>
+        <div class="label">Project archive</div>
+        <h1 class="display">Academic research, other projects, and blogs.</h1>
+      </div>
+      <p class="page-head-right">
+        This page is structured to grow: finished research, data science experiments,
+        graph-based explainers, and shorter essay-style notes can all live here without
+        turning the site back into a crowded resume.
+      </p>
+    </section>
+
+    <nav class="project-tabs" aria-label="Project categories">
+      <a href="#academic-research" class="tab-chip"><i class="bi bi-journal-text"></i> Academic Research</a>
+      <a href="#other-projects" class="tab-chip"><i class="bi bi-bar-chart-line"></i> Other Projects</a>
+      <a href="#blogs" class="tab-chip"><i class="bi bi-pencil-square"></i> Blogs</a>
+    </nav>
+
+    <section class="project-section" id="academic-research">
+      <div class="section-shell">
+        <div>
+          <div class="label">Academic Research</div>
+          <h2 class="display" style="font-size:1.8rem;">Long-form work</h2>
+          <p class="section-note">Papers, policy writing, and research projects with enough substance to deserve their own pages.</p>
+        </div>
+
+        <div class="project-list">
+          <a href="works/discontent.html" class="project-card">
+            <div>
+              <div class="project-kicker">Political research · Completed</div>
+              <h3 class="project-title">Politics of Discontent in Nepal</h3>
+              <p class="project-desc">Fieldwork-based research on political narratives, mainstream parties, alternative movements, and Nepal's urban political landscape.</p>
+              <div class="project-tags">
+                <span class="tag">22 Interviews</span>
+                <span class="tag">Nepal</span>
+                <span class="tag">Political Narratives</span>
+              </div>
+            </div>
+            <span class="project-status live">Published page</span>
+          </a>
+
+          <a href="works/migration.html" class="project-card">
+            <div>
+              <div class="project-kicker">Policy research · Completed</div>
+              <h3 class="project-title">Nepali Migrant Workers in the Gulf</h3>
+              <p class="project-desc">Research and writing on labor diplomacy, worker protection, recruitment debt, and GCC migration governance.</p>
+              <div class="project-tags">
+                <span class="tag">Labor Diplomacy</span>
+                <span class="tag">GCC</span>
+                <span class="tag">Migrant Workers</span>
+              </div>
+            </div>
+            <span class="project-status live">Published page</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section" id="other-projects">
+      <div class="section-shell">
+        <div>
+          <div class="label">Other Projects</div>
+          <h2 class="display" style="font-size:1.8rem;">Graphs and notebooks</h2>
+          <p class="section-note">A future home for small data science projects, visualizations, and reproducible notes.</p>
+        </div>
+
+        <div class="project-list">
+          <a href="works/data-lab.html" class="project-card">
+            <div>
+              <div class="project-kicker">Data science · Planned</div>
+              <h3 class="project-title">Data Lab Index</h3>
+              <p class="project-desc">A lightweight workspace for future charts, short analyses, datasets, and notebook-style project writeups.</p>
+              <div class="project-tags">
+                <span class="tag">Graphs</span>
+                <span class="tag">Dashboards</span>
+                <span class="tag">Notebooks</span>
+              </div>
+            </div>
+            <span class="project-status planned">Scaffold ready</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section" id="blogs">
+      <div class="section-shell">
+        <div>
+          <div class="label">Blogs</div>
+          <h2 class="display" style="font-size:1.8rem;">Blog-style writing</h2>
+          <p class="section-note">Shorter pieces that are not full research projects but still show how you think.</p>
+        </div>
+
+        <div class="project-list">
+          <a href="works/notes.html" class="project-card">
+            <div>
+              <div class="project-kicker">Essay shelf · Planned</div>
+              <h3 class="project-title">Notes and Essays</h3>
+              <p class="project-desc">A place for concise posts, reading notes, reflections on data, policy commentary, and rougher research ideas.</p>
+              <div class="project-tags">
+                <span class="tag">Blog</span>
+                <span class="tag">Research Notes</span>
+                <span class="tag">Essays</span>
+              </div>
+            </div>
+            <span class="project-status planned">Scaffold ready</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/theme.js"></script>
+  <script>
+    const toggle=document.getElementById('navToggle'),links=document.getElementById('navLinks');
+    toggle.addEventListener('click',()=>{const open=links.classList.toggle('open');toggle.innerHTML=open?'<i class="bi bi-x-lg"></i>':'<i class="bi bi-list"></i>';});
+  </script>
+</body>
+</html>

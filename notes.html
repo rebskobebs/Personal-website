@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes — Sparsh Adhikari</title>
+  <script>if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');</script>
+  <link rel="icon" href="../assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/css/site.css" rel="stylesheet">
+  <style>
+    .notes-hero { padding: 64px 48px 56px; border-bottom: 1px solid var(--border); max-width: 900px; }
+    .notes-title { font-family: "Playfair Display", serif; font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 400; line-height: 1.1; color: var(--text); margin: 16px 0; }
+    .notes-intro { font-size: 1.02rem; color: var(--muted2); line-height: 1.85; max-width: 720px; }
+    .notes-body { padding: 56px 48px 80px; display: grid; grid-template-columns: 280px 1fr; gap: 56px; }
+    .notes-note { color: var(--muted2); font-size: 0.9rem; line-height: 1.75; }
+    .post-list { display: grid; border-top: 1px solid var(--border); }
+    .post-row { padding: 24px 0; border-bottom: 1px solid var(--border); }
+    .post-meta { color: var(--muted); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
+    .post-title { font-family: "Playfair Display", serif; font-size: 1.35rem; color: var(--text); margin-bottom: 8px; }
+    .post-copy { color: var(--muted2); font-size: 0.92rem; line-height: 1.75; max-width: 720px; }
+    @media (max-width: 800px) { .notes-body { grid-template-columns: 1fr; } }
+    @media (max-width: 700px) { .notes-hero, .notes-body { padding-left: 20px; padding-right: 20px; } }
+  </style>
+</head>
+<body>
+  <header id="site-nav">
+    <a href="../index.html" class="nav-logo">SA</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html#projects" class="active">Projects</a></li>
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#experience">Experience</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><i class="bi bi-moon"></i></button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><i class="bi bi-list"></i></button>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="notes-hero">
+      <a href="../index.html#blogs" class="back-link"><i class="bi bi-arrow-left"></i> Projects</a>
+      <div class="label" style="margin-top:32px;">Blogs</div>
+      <h1 class="notes-title">Blogs and Essays</h1>
+      <p class="notes-intro">
+        A planned shelf for shorter writing: research notes, policy reflections, reading responses,
+        data observations, and blog-style pieces that do not need a full project page.
+      </p>
+    </section>
+
+    <section class="notes-body">
+      <aside>
+        <div class="label">Use this for</div>
+        <p class="notes-note">Short posts with a clear claim, evidence, and takeaway. Keep them sharper than journal entries and lighter than research papers.</p>
+      </aside>
+      <div class="post-list">
+        <article class="post-row">
+          <div class="post-meta">Draft slot</div>
+          <h2 class="post-title">First note title</h2>
+          <p class="post-copy">Replace this with a real note when you have a short idea, argument, or reflection ready to publish.</p>
+        </article>
+        <article class="post-row">
+          <div class="post-meta">Suggested format</div>
+          <h2 class="post-title">Claim, context, evidence, takeaway</h2>
+          <p class="post-copy">That format keeps the page readable while still showing how you think through research, policy, and data questions.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="../assets/js/theme.js"></script>
+  <script>
+    const toggle=document.getElementById('navToggle'),links=document.getElementById('navLinks');
+    toggle.addEventListener('click',()=>{const open=links.classList.toggle('open');toggle.innerHTML=open?'<i class="bi bi-x-lg"></i>':'<i class="bi bi-list"></i>';});
+  </script>
+</body>
+</html>
