@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sparsh Adhikari</title>
+  <script>if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');</script>
+  <meta name="description" content="Sparsh Adhikari — Georgetown BSFS student, researcher, and writer working on Nepal politics, labor diplomacy, and international economics.">
+  <link rel="icon" href="assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- fonts loaded via site.css @import -->
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/site.css" rel="stylesheet">
+  <link href="assets/css/index.css" rel="stylesheet">
+</head>
+
+<body>
+  <header id="site-nav">
+    <a href="#" class="nav-logo">SA</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><i class="bi bi-moon"></i></button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><i class="bi bi-list"></i></button>
+    </div>
+  </header>
+
+  <main class="home">
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-content reveal">
+        <div class="hero-tag">Georgetown SFS · Doha, Qatar</div>
+        <h1 class="hero-name">Sparsh<br><span class="ac">Adhikari</span></h1>
+        <p class="hero-desc">
+          A Researcher, Thinker and Data Science Enthusiast working across
+          Nepali Politics, Economics, and Diplomacy. BSFS '28.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-amber">See my work</a>
+          <a href="#contact" class="btn btn-outline">Get in touch</a>
+        </div>
+      </div>
+
+      <div class="hero-graph" aria-hidden="true">
+        <canvas id="graphCanvas"></canvas>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="s">
+      <div class="s-shell">
+        <div class="about-grid">
+          <div class="about-photo-wrap reveal">
+            <div class="about-photo-frame">
+              <img class="about-photo" src="assets/img/profile-img.jpg" alt="Sparsh Adhikari">
+            </div>
+            <p class="about-caption">Doha Forum, Qatar 2025</p>
+          </div>
+          <div class="reveal reveal-d1">
+            <span class="label">About</span>
+            <h2 class="about-title">Research minded.<br>Data curious.<br>Philosophy geek.</h2>
+            <div class="about-bio">
+              <p>
+                I am currently working as Georgetown's Center for Research and Fellowships' Summer
+                Research Fellow conducting study on "Remittance and Household Consumption in Nepal" with Professor Lamis Kattan.
+                I am also a Student Finance Assistant in the GUQ Finance Office, contributing to
+                Excel-based dashboards, automated procurement workflows, and process documentation.
+              </p>
+              <p>
+                I am interested in academic research and philosophical inquiry into the complex
+                reality we live in. I specialize in quantitative and qualitative research practices
+                and am skilled in R, Stata, Atlas.ti, and Excel.
+              </p>
+            </div>
+            <div class="facts">
+              <div class="fact">
+                <div class="fact-k">University</div>
+                <div class="fact-v">Georgetown University in Qatar</div>
+              </div>
+              <div class="fact">
+                <div class="fact-k">Degree</div>
+                <div class="fact-v">BSFS · Class of 2028</div>
+              </div>
+              <div class="fact">
+                <div class="fact-k">Focus</div>
+                <div class="fact-v">Int'l Economics · Mathematics · Philosophy</div>
+              </div>
+              <div class="fact">
+                <div class="fact-k">From</div>
+                <div class="fact-v">Nuwakot, Nepal (Living in Doha, Qatar)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="proj-header reveal">
+        <div>
+          <span class="label">Projects</span>
+          <h2 class="display">Work across disciplines.</h2>
+        </div>
+        <p class="proj-hint">Hover to preview · Click to open</p>
+      </div>
+
+      <div class="proj-row">
+        <div class="row-head">
+          <h3 class="row-name">Academic Research</h3>
+          <div class="row-btns">
+            <button class="row-btn" onclick="scrollDock('d-academic',-1)"><i class="bi bi-chevron-left"></i></button>
+            <button class="row-btn" onclick="scrollDock('d-academic', 1)"><i class="bi bi-chevron-right"></i></button>
+          </div>
+        </div>
+        <div class="dock" id="d-academic">
+          <div class="pcard" role="button" tabindex="0" onclick="openModal('research-modal')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('research-modal')" style="cursor:pointer">
+            <div class="pcard-tag">Nepal Politics · Electoral Shift · Alternative Politics</div>
+            <div class="pcard-title">Urban Political Realignment and Electoral Shift in Kathmandu</div>
+            <p class="pcard-desc">A study of urban political discontent in Kathmandu and how it reshapes voter behavior and drives the shift from mainstream parties to alternative movements.</p>
+            <div class="pcard-foot"><span>View poster</span><i class="bi bi-arrow-up-right"></i></div>
+          </div>
+          <a class="pcard dim">
+            <div class="pcard-tag">Nepali Politics · Revolution · Gen Z Protest</div>
+            <div class="pcard-title">Urban Discontent and the Reshaping of Political Space Before the Gen Z Revolt</div>
+            <p class="pcard-desc">Tracing how growing urban discontent, declining party legitimacy, and alternative movements created the conditions for the Gen Z uprising.</p>
+            <div class="pcard-foot"><span>Work in progress</span><i class="bi bi-clock"></i></div>
+          </a>
+          <a class="pcard dim">
+            <div class="pcard-tag">Applied Econometrics · Remittance · Consumption</div>
+            <div class="pcard-title">Remittance and Household Consumption in Nepal</div>
+            <p class="pcard-desc">Examines how foreign remittances by amount and source country are associated with household per-capita consumption using NLSS-IV microdata.</p>
+            <div class="pcard-foot"><span>Work in progress</span><i class="bi bi-clock"></i></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="proj-row">
+        <div class="row-head">
+          <h3 class="row-name">Blogs</h3>
+          <div class="row-btns">
+            <button class="row-btn" onclick="scrollDock('d-blogs',-1)"><i class="bi bi-chevron-left"></i></button>
+            <button class="row-btn" onclick="scrollDock('d-blogs', 1)"><i class="bi bi-chevron-right"></i></button>
+          </div>
+        </div>
+        <div class="dock" id="d-blogs">
+          <div class="pcard" role="button" tabindex="0" onclick="openModal('blog-modal-1')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('blog-modal-1')" style="cursor:pointer">
+            <div class="pcard-tag">Gen Z Protest · Political Discontent</div>
+            <div class="pcard-title">Longstanding political message ignored by political parties</div>
+            <p class="pcard-desc">Drawing from fieldwork on emerging political discontent, this piece analyzes how the Gen Z uprising revealed deeper structural frustrations that parties had long overlooked.</p>
+            <div class="pcard-foot"><span>Read more</span><i class="bi bi-arrow-up-right"></i></div>
+          </div>
+          <div class="pcard" role="button" tabindex="0" onclick="openModal('blog-modal-2')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('blog-modal-2')" style="cursor:pointer">
+            <div class="pcard-tag">Labor Diplomacy · Migrant Workers · Gulf Migration</div>
+            <div class="pcard-title">The Plight of Nepali Migrant Workers in the GCC</div>
+            <p class="pcard-desc">Examining structural exploitation, diplomatic shortcomings, and policy failures — calling for a rights-based foreign policy and stronger embassy accountability.</p>
+            <div class="pcard-foot"><span>Read more</span><i class="bi bi-arrow-up-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-row">
+        <div class="row-head">
+          <h3 class="row-name">Other Projects</h3>
+          <div class="row-btns">
+            <button class="row-btn" onclick="scrollDock('d-other',-1)"><i class="bi bi-chevron-left"></i></button>
+            <button class="row-btn" onclick="scrollDock('d-other', 1)"><i class="bi bi-chevron-right"></i></button>
+          </div>
+        </div>
+        <div class="dock" id="d-other">
+          <a class="pcard dim">
+            <div class="pcard-tag">Coming Soon</div>
+            <div class="pcard-title">More projects on the way</div>
+            <p class="pcard-desc">Other work and tools currently in development.</p>
+            <div class="pcard-foot"><span>Coming soon</span><i class="bi bi-clock"></i></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="s">
+      <div class="s-shell">
+        <div class="exp-header reveal">
+          <div>
+            <span class="label">Experience</span>
+            <h2 class="display">A journey in four chapters.</h2>
+          </div>
+          <div class="exp-header-right">
+            <span class="proj-hint">Hover an entry for details · Scroll to explore</span>
+            <a href="https://drive.google.com/file/d/1_ohBxQd6Y7QT3Sl7I5lIFPd3DIsYhGoj/view?usp=sharing"
+               target="_blank" rel="noopener"
+               class="btn btn-outline" style="font-size:0.7rem;padding:8px 18px;white-space:nowrap;">
+              View Resume <i class="bi bi-arrow-up-right"></i>
+            </a>
+            <div class="row-btns">
+              <button class="row-btn" onclick="scrollDock('d-chapters',-1)"><i class="bi bi-chevron-left"></i></button>
+              <button class="row-btn" onclick="scrollDock('d-chapters', 1)"><i class="bi bi-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="chapters reveal reveal-d1" id="d-chapters">
+
+          <div class="chapter">
+            <div class="chap-num">Chapter I</div>
+            <h3 class="chap-name">Roots</h3>
+            <div class="exp">
+              <div class="exp-when">Jan 2024 – Jun 2024</div>
+              <div class="exp-role">HR &amp; Admin Officer</div>
+              <div class="exp-org">Debate Network Nepal</div>
+              <p class="exp-note">Managed budgeting and financial reporting across 15+ programs, co-handling NPR 2.4M in transactions while overseeing HR, reconciliations, and audit compliance.</p>
+            </div>
+            <div class="exp">
+              <div class="exp-when">Jun 2023 – Jan 2024</div>
+              <div class="exp-role">Administrative &amp; Finance Officer</div>
+              <div class="exp-org">Debate Network Nepal</div>
+              <p class="exp-note">Streamlined digital financial tracking using Excel and Google Sheets, maintained audit-compliant records, and supported clerical operations.</p>
+            </div>
+            <div class="exp">
+              <div class="exp-when">May 2023 – Dec 2023</div>
+              <div class="exp-role">Equity Officer</div>
+              <div class="exp-org">Debate Network Nepal</div>
+              <p class="exp-note">Ensured inclusive debate participation across diverse backgrounds and led the amendment and formation of Debate Network Nepal's equity policy.</p>
+            </div>
+            <div class="exp">
+              <div class="exp-when">May 2023 – Apr 2024</div>
+              <div class="exp-role">Public Speaking Trainer</div>
+              <div class="exp-org">Bal Deeksha Sadan Secondary School</div>
+              <p class="exp-note">Taught fundamentals of public speaking and debating while organizing school-wide events and activities.</p>
+            </div>
+            <div class="exp">
+              <div class="exp-when">Sep 2021 – Jun 2023</div>
+              <div class="exp-role">Sub-Secretary → President, Ecosphere Club</div>
+              <div class="exp-org">St. Xavier's College, Maitighar</div>
+              <p class="exp-note">Led a team of 13 executives and 60+ members, organized Annual EcoDrama, managed club finances, and authored proposals and formal communications.</p>
+            </div>
+          </div>
+
+          <div class="chapter">
+            <div class="chap-num">Chapter II</div>
+            <h3 class="chap-name">Georgetown</h3>
+            <div class="exp">
+              <div class="exp-when">Jan 2026 – Present</div>
+              <div class="exp-role">Finance Student Assistant</div>
+              <div class="exp-org">Office of Finance, Georgetown University in Qatar</div>
+              <p class="exp-note">Builds Excel dashboards supporting procurement and finance workflows while contributing to strategic sourcing, data reconciliation, and documentation control.</p>
+            </div>
+            <div class="exp">
+              <div class="exp-when">Dec 2024 – May 2026</div>
+              <div class="exp-role">Vice President → President, Georgetown Debate Union</div>
+              <div class="exp-org">Georgetown University in Qatar</div>
+              <p class="exp-note">Progressed from VP to President, overseeing tournament logistics, conducting weekly training sessions, and facilitating campus workshops on parliamentary debating.</p>
+            </div>
+            <div class="exp">
+              <div class="exp-when">Jul 2025 · 1 month</div>
+              <div class="exp-role">Peer Tutor / Teaching Assistant</div>
+              <div class="exp-org">Georgetown Pre-College Summer Program</div>
+              <p class="exp-note">Served as TA for World Geography, mentoring ~62 students and providing academic and social support throughout the program.</p>
+            </div>
+          </div>
+
+          <div class="chapter">
+            <div class="chap-num">Chapter III</div>
+            <h3 class="chap-name">Research</h3>
+            <div class="exp">
+              <div class="exp-when">Fall 2026 (upcoming)</div>
+              <div class="exp-role">Research Assistant</div>
+              <div class="exp-org">HEC Paris in Qatar</div>
+              <p class="exp-note">Will support Prof. Seungah Sarah Lee's research on entrepreneurialism and society, examining how intermediary organizations broker access to networks and resources.</p>
+            </div>
+            <div class="exp">
+              <div class="exp-when">Summer 2026</div>
+              <div class="exp-role">CRF Research Fellow</div>
+              <div class="exp-org">Center for Research and Fellowships, Georgetown University</div>
+              <p class="exp-note">Awarded a competitive fellowship for an independent study on foreign remittances and household consumption in Nepal.</p>
+            </div>
+            <div class="exp">
+              <div class="exp-when">Apr 2025 – Dec 2025</div>
+              <div class="exp-role">Student Researcher</div>
+              <div class="exp-org">Georgetown University in Qatar</div>
+              <p class="exp-note">Conducted 22 semi-structured interviews with voters, politicians, and civil society leaders in Kathmandu. Published findings in The Annapurna Express.</p>
+            </div>
+            <div class="exp">
+              <div class="exp-when">May 2024 – Jul 2024</div>
+              <div class="exp-role">Research Intern</div>
+              <div class="exp-org">National Policy Forum (NPF)</div>
+              <p class="exp-note">Reviewed Nepal's Policy and Program for evidence-based recommendations, authored articles on GCC labor diplomacy, and analyzed trade datasets.</p>
+            </div>
+          </div>
+
+          <div class="chapter">
+            <div class="chap-num">Chapter IV</div>
+            <h3 class="chap-name">Community</h3>
+            <div class="exp">
+              <div class="exp-when">Dec 2022 – Present</div>
+              <div class="exp-role">General Member &amp; Trainer</div>
+              <div class="exp-org">Debate Network Nepal</div>
+              <p class="exp-note">Delivers ongoing debate coaching and public speaking workshops across Nepal, contributing across multiple roles over 3+ years within the organization.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- COURSES -->
+    <section id="courses">
+      <div class="courses-head reveal">
+        <span class="label">Courses &amp; Certificates</span>
+        <h2 class="display">Continuing education.</h2>
+      </div>
+      <div class="dock" id="d-courses">
+        <div class="ccard">
+          <div class="ccard-tag">Course</div>
+          <div class="ccard-title">Introduction to R</div>
+          <div class="ccard-meta">DataCamp · 2025 (Ongoing)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="s">
+      <div class="s-shell">
+        <div class="contact-grid">
+          <div class="reveal">
+            <span class="label">Contact</span>
+            <h2 class="contact-big">Let's talk<br>research, philosophy,<br>data, or ideas.</h2>
+          </div>
+          <div class="reveal reveal-d1">
+            <div class="clinks">
+              <a href="mailto:sa2117@georgetown.edu" class="clink">
+                <div>
+                  <div class="cl-platform">Georgetown Email</div>
+                  <div class="cl-value">sa2117@georgetown.edu</div>
+                </div>
+                <i class="bi bi-arrow-up-right cl-arrow"></i>
+              </a>
+              <a href="mailto:sparshadhikari.3@gmail.com" class="clink">
+                <div>
+                  <div class="cl-platform">Personal Email</div>
+                  <div class="cl-value">sparshadhikari.3@gmail.com</div>
+                </div>
+                <i class="bi bi-arrow-up-right cl-arrow"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/sparshadhikari" target="_blank" rel="noopener" class="clink">
+                <div>
+                  <div class="cl-platform">LinkedIn</div>
+                  <div class="cl-value">linkedin.com/in/sparshadhikari</div>
+                </div>
+                <i class="bi bi-arrow-up-right cl-arrow"></i>
+              </a>
+              <a href="https://www.instagram.com/sparshadhikari_" target="_blank" rel="noopener" class="clink">
+                <div>
+                  <div class="cl-platform">Instagram</div>
+                  <div class="cl-value">@sparshadhikari_</div>
+                </div>
+                <i class="bi bi-arrow-up-right cl-arrow"></i>
+              </a>
+              <a href="https://www.facebook.com/my.sparsh" target="_blank" rel="noopener" class="clink">
+                <div>
+                  <div class="cl-platform">Facebook</div>
+                  <div class="cl-value">facebook.com/my.sparsh</div>
+                </div>
+                <i class="bi bi-arrow-up-right cl-arrow"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Research Poster Modal ── -->
+  <div id="research-modal" class="rmodal-bg" onclick="if(event.target===this)closeModal('research-modal')">
+    <div class="rmodal">
+      <div class="rmodal-bar">
+        <div class="rmodal-wip"><span class="rmodal-dot"></span>Paper in Progress</div>
+        <button class="rmodal-close" onclick="closeModal('research-modal')" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="rmodal-head">
+        <span class="label">Academic Research · Nepal Politics</span>
+        <h2 class="rmodal-title">Urban Political Realignment and Electoral Shift in Kathmandu</h2>
+        <!-- EDIT: your description goes here -->
+        <p class="rmodal-desc"></p>
+        <div class="rmodal-meta">
+          <!-- EDIT: update or remove these tags -->
+          <span class="tag"> The study is done on the basis of 22 interviews of political actors from mainstream politics, alternative political movements and civil society from Kathmandu in Summer 2025.</span>
+        </div>
+      </div>
+      <div class="rmodal-embed">
+        <iframe src="https://drive.google.com/file/d/17iIr43ci48gzmf9ksi27PEI0061hzKk2/preview"
+                title="Research Poster" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="rmodal-foot">
+        <a href="#projects" onclick="closeModal('research-modal')">
+          Related article published — see Blog section <i class="bi bi-arrow-down"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Blog Modal 1 — Annapurna Express ── -->
+  <div id="blog-modal-1" class="rmodal-bg" onclick="if(event.target===this)closeModal('blog-modal-1')">
+    <div class="rmodal rmodal-reader">
+      <div class="rmodal-bar">
+        <span class="rmodal-pub">The Annapurna Express</span>
+        <button class="rmodal-close" onclick="closeModal('blog-modal-1')" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="rmodal-head">
+        <span class="label">Blog · Gen Z Protest · Political Discontent</span>
+        <h2 class="rmodal-title">Longstanding political message ignored by political parties</h2>
+        <p class="rmodal-desc">
+          Click on the "Read full article" link to view the complete piece.
+        </p>
+      </div>
+      <div class="rmodal-preview">
+        <img src="https://annapurnaexpress.prixacdn.net/media/albums/Gen_Z_protest_pLhbd3sIJj.jpg"
+             alt="Gen Z protest article cover from The Annapurna Express"
+             loading="lazy">
+        <div class="rmodal-preview-copy">
+          <div class="rmodal-preview-label">Published writing</div>
+          <p>
+            An analysis of how Nepal's Gen Z protest reflected longer-running political
+            discontent and how mainstream parties failed to respond to that message.
+          </p>
+        </div>
+      </div>
+      <div class="rmodal-foot">
+        <a href="https://theannapurnaexpress.com/story/60030/" target="_blank" rel="noopener" class="btn btn-amber" style="font-size:0.78rem;padding:10px 22px;">
+          Read full article <i class="bi bi-arrow-up-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Blog Modal 2 — National Policy Forum ── -->
+  <div id="blog-modal-2" class="rmodal-bg" onclick="if(event.target===this)closeModal('blog-modal-2')">
+    <div class="rmodal rmodal-reader">
+      <div class="rmodal-bar">
+        <span class="rmodal-pub">National Policy Forum</span>
+        <button class="rmodal-close" onclick="closeModal('blog-modal-2')" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="rmodal-head">
+        <span class="label">Blog · Labor Diplomacy · Migrant Workers · Gulf Migration</span>
+        <h2 class="rmodal-title">The Plight of Nepali Migrant Workers in the GCC</h2>
+        <p class="rmodal-desc">
+          Click on the "Read full article" link to view the complete piece in the publisher's site.
+        </p>
+      </div>
+      <div class="rmodal-embed rmodal-article-embed">
+        <iframe src="https://nationalpolicyforum.com/posts/the-plight-of-nepali-migrant-workers-in-the-gcc-protection-and-empowerment-through-diplomacy/"
+                title="The Plight of Nepali Migrant Workers in the GCC article" loading="lazy"></iframe>
+      </div>
+      <div class="rmodal-foot">
+        <a href="https://nationalpolicyforum.com/posts/the-plight-of-nepali-migrant-workers-in-the-gcc-protection-and-empowerment-through-diplomacy/" target="_blank" rel="noopener" class="btn btn-amber" style="font-size:0.78rem;padding:10px 22px;">
+          Read full article <i class="bi bi-arrow-up-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>Sparsh Adhikari · 2025</span>
+    <span>Georgetown University in Qatar</span>
+  </footer>
+
+  <script src="assets/js/theme.js"></script>
+  <script>
+    // ── Nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks  = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      navToggle.innerHTML = open ? '<i class="bi bi-x-lg"></i>' : '<i class="bi bi-list"></i>';
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.innerHTML = '<i class="bi bi-list"></i>';
+      });
+    });
+
+    // ── Scroll reveal
+    const ro = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('up'); ro.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+    // ── Active nav
+    const sections = document.querySelectorAll('section[id]');
+    const navAs = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let cur = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id; });
+      navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+    }, { passive: true });
+
+    // ── Dock scroll buttons
+    function scrollDock(id, dir) {
+      const el = document.getElementById(id);
+      if (el) el.scrollBy({ left: dir * 560, behavior: 'smooth' });
+    }
+
+    // ── Modals
+    function openModal(id) {
+      document.getElementById(id).classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.rmodal-bg.open').forEach(function(m) { m.classList.remove('open'); });
+        document.body.style.overflow = '';
+      }
+    });
+
+    // ── Network graph
+    (function () {
+      const canvas = document.getElementById('graphCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const N = 38, LINK_DIST = 120, SPEED = 0.28;
+      let W, H, nodes = [];
+
+      function hexToRgb(hex) {
+        hex = hex.replace('#', '');
+        if (hex.length === 3) hex = hex.split('').map(c => c+c).join('');
+        const n = parseInt(hex, 16);
+        return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+      }
+
+      function readAccent() {
+        const raw = getComputedStyle(document.documentElement).getPropertyValue('--amber').trim();
+        try { return hexToRgb(raw); } catch(e) { return [0, 48, 135]; }
+      }
+
+      function resize() {
+        W = canvas.width  = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+      }
+
+      function initNodes() {
+        nodes = Array.from({ length: N }, () => ({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() - 0.5) * SPEED,
+          vy: (Math.random() - 0.5) * SPEED,
+          r: 2 + Math.random() * 2.5,
+        }));
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        const [r, g, b] = readAccent();
+        nodes.forEach(n => {
+          n.x += n.vx; n.y += n.vy;
+          if (n.x < 0 || n.x > W) n.vx *= -1;
+          if (n.y < 0 || n.y > H) n.vy *= -1;
+        });
+        for (let i = 0; i < N; i++) {
+          for (let j = i + 1; j < N; j++) {
+            const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < LINK_DIST) {
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.strokeStyle = `rgba(${r},${g},${b},${0.18 * (1 - dist / LINK_DIST)})`;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+        }
+        nodes.forEach(n => {
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${r},${g},${b},0.55)`;
+          ctx.fill();
+        });
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', () => { resize(); });
+      resize();
+      initNodes();
+      draw();
+    }());
+
+  </script>
+</body>
+</html>
