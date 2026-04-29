@@ -267,6 +267,7 @@
   padding: 4px 64px 32px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+   overscroll-behavior-x: contain;
 }
 
 .dock::-webkit-scrollbar { display: none; }
@@ -382,6 +383,9 @@
   border: 1px solid var(--border);
   margin-top: 44px;
   scrollbar-width: none;
+   -webkit-overflow-scrolling: touch;
+overscroll-behavior-x: contain;
+
 }
 
 .chapters::-webkit-scrollbar { display: none; }
@@ -599,17 +603,93 @@ footer {
 /* ─── RESPONSIVE — mobile (≤ 700px) ────────────── */
 
 @media (max-width: 700px) {
-  .hero-content, .s             { padding-left: 20px; padding-right: 20px; }
-  .proj-header, .row-head,
-  .courses-head                 { padding-left: 20px; padding-right: 20px; }
-  .dock                         { padding-left: 20px; padding-right: 20px; }
-  .facts                        { grid-template-columns: 1fr; }
-  .fact                         { border-right: none; }
-  .fact:nth-last-child(-n+2)    { border-bottom: 1px solid var(--border); }
-  .fact:last-child              { border-bottom: none; }
-  footer                        { padding: 20px; flex-direction: column; gap: 8px; }
-  .chapter                      { flex: 0 0 calc(100vw - 56px); }
-  .exp-header                   { flex-direction: column; align-items: flex-start; gap: 16px; }
+ .proj-header {
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 32px;
+}
+
+.proj-hint {
+  display: none;
+}
+
+.row-head {
+  padding-top: 22px;
+  padding-bottom: 14px;
+}
+
+.row-name {
+  font-size: 1.18rem;
+  line-height: 1.25;
+}
+
+.row-btns {
+  display: none;
+}
+
+.dock,
+.chapters {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  overflow: visible;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+  touch-action: pan-y;
+}
+
+.dock {
+  padding: 4px 20px 32px;
+}
+
+.chapters {
+  border: 0;
+  margin-top: 30px;
+}
+
+.pcard,
+.ccard {
+  flex-basis: auto;
+  width: 100%;
+  min-height: auto;
+  scroll-snap-align: none;
+}
+
+.pcard {
+  padding: 22px;
+}
+
+.pcard-desc {
+  max-height: none;
+  opacity: 1;
+  margin-top: 12px;
+}
+
+.pcard:hover {
+  transform: none;
+}
+
+.chapter {
+  flex-basis: auto;
+  width: 100%;
+  border: 1px solid var(--border);
+  padding: 24px 20px;
+  scroll-snap-align: none;
+}
+
+.chapter:last-child {
+  border-right: 1px solid var(--border);
+}
+
+.exp-header-right {
+  width: 100%;
+}
+
+.exp-header-right .btn {
+  width: 100%;
+  justify-content: center;
+}
+
 }
 
 
