@@ -190,7 +190,7 @@
    * Correct scrolling position upon page load for URLs containing hash links.
    */
   if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
+    history.scrollRestoration = 'auto';
   }
 
   window.addEventListener('load', function(e) {
