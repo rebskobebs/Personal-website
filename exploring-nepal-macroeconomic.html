@@ -672,13 +672,17 @@
       }
 
       function drawChart() {
-        els.canvas.width = els.canvas.clientWidth;
-        els.canvas.height = els.canvas.clientHeight;
+        const dpr = window.devicePixelRatio || 1;
+        const cssW = els.canvas.clientWidth;
+        const cssH = els.canvas.clientHeight;
+        els.canvas.width = cssW * dpr;
+        els.canvas.height = cssH * dpr;
         const rows = displayRows();
         const config = axisConfig(rows);
         const ctx = els.canvas.getContext("2d");
-        const w = els.canvas.width;
-        const h = els.canvas.height;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const w = cssW;
+        const h = cssH;
         const pad = { top: 58, right: config.dual ? 120 : 40, bottom: 88, left: 116 };
         const plotW = w - pad.left - pad.right;
         const plotH = h - pad.top - pad.bottom;
@@ -958,8 +962,8 @@
       function hoverChart(event) {
         const rect = els.canvas.getBoundingClientRect();
         const mouse = {
-          x: ((event.clientX - rect.left) / rect.width) * els.canvas.width,
-          y: ((event.clientY - rect.top) / rect.height) * els.canvas.height,
+          x: event.clientX - rect.left,
+          y: event.clientY - rect.top,
           cssX: event.clientX - rect.left,
           cssY: event.clientY - rect.top,
         };
