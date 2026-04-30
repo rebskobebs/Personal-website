@@ -651,7 +651,7 @@
         pairs.forEach((pair) => {
           const px = x(pair.xRow.displayValue);
           const py = y(pair.yRow.displayValue);
-          ctx.fillStyle = colors[1];
+          ctx.fillStyle = colors[indicators.findIndex((item) => item.id === yId) % colors.length];
           ctx.beginPath();
           ctx.arc(px, py, 6, 0, Math.PI * 2);
           ctx.fill();
@@ -734,9 +734,9 @@
         ctx.fillText("Year", pad.left + plotW / 2, h - 12);
         ctx.textAlign = "left";
 
-        state.selected.forEach((id, index) => {
+        state.selected.forEach((id) => {
           const series = rows.filter((row) => row.id === id).sort((a, b) => a.year - b.year);
-          const color = colors[index % colors.length];
+          const color = colors[indicators.findIndex((item) => item.id === id) % colors.length];
           ctx.strokeStyle = color;
           ctx.fillStyle = color;
           ctx.lineWidth = 3;
@@ -789,8 +789,8 @@
         });
 
         let legendX = pad.left;
-        state.selected.forEach((id, index) => {
-          ctx.fillStyle = colors[index % colors.length];
+        state.selected.forEach((id) => {
+          ctx.fillStyle = colors[indicators.findIndex((item) => item.id === id) % colors.length];
           ctx.fillRect(legendX, 16, 12, 12);
           ctx.fillStyle = "#344054";
           ctx.fillText(indicator(id).name, legendX + 18, 27);
@@ -798,10 +798,10 @@
         });
 
         if (config.dual) {
-          ctx.fillStyle = colors[0];
+          ctx.fillStyle = colors[indicators.findIndex((item) => item.id === config.left[0]) % colors.length];
           ctx.font = "bold 13px sans-serif";
           ctx.fillText(`Left axis: ${shortNames(config.left)} (${axisText(config.left)})`, pad.left, h - 42);
-          ctx.fillStyle = colors[1];
+          ctx.fillStyle = colors[indicators.findIndex((item) => item.id === config.right[0]) % colors.length];
           ctx.textAlign = "right";
           ctx.fillText(`Right axis: ${shortNames(config.right)} (${axisText(config.right)})`, w - pad.right, h - 42);
           ctx.textAlign = "left";
@@ -979,7 +979,6 @@
               <span>${nearest.point.xName}: ${fmt(nearest.point.xValue)} ${nearest.point.xUnit}</span>
               <span>${nearest.point.name}: ${fmt(nearest.point.value)} ${nearest.point.unit}</span>
               ${alternateLines}
-              <span>Source: ${nearest.point.source}</span>
             `
             : `
               <strong>${nearest.point.name}</strong>
@@ -987,7 +986,6 @@
               <span>Value: ${fmt(nearest.point.value)} ${nearest.point.unit}</span>
               ${alternateLines}
               <span>Axis: ${nearest.point.axis === "right" ? "Right y-axis" : "Left y-axis"}</span>
-              <span>Source: ${nearest.point.source}</span>
             `;
         els.tooltip.style.left = `${Math.min(mouse.cssX + 12, els.canvas.clientWidth - 292)}px`;
         els.tooltip.style.top = `${Math.max(8, mouse.cssY - 12)}px`;
@@ -1052,6 +1050,8 @@
       els.canvas.addEventListener("mouseleave", clearHover);
 
       loadData();
+
+      [els.startYear, els.endYear].forEach((el) => el.addEventListener("focus", () => el.select()));
     </script>
     <script src="assets/js/theme.js"></script>
     <script>
