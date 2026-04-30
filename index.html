@@ -158,14 +158,14 @@
             <div class="pcard-tag">Gen Z Protest · Political Discontent</div>
             <div class="pcard-title">Longstanding political message ignored by political parties</div>
             <p class="pcard-desc">Drawing from fieldwork on emerging political discontent, this piece analyzes how the Gen Z uprising revealed deeper structural frustrations that parties had long overlooked.</p>
-            <div class="pcard-pub"><strong>The Annapurna Express</strong></div>
+            <div class="pcard-pub">The Annapurna Express</div>
             <div class="pcard-foot"><span>Read more</span><i class="bi bi-arrow-up-right"></i></div>
           </div>
           <div class="pcard" role="button" tabindex="0" onclick="openModal('blog-modal-2')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('blog-modal-2')" style="cursor:pointer">
             <div class="pcard-tag">Labor Diplomacy · Migrant Workers · Gulf Migration</div>
             <div class="pcard-title">The Plight of Nepali Migrant Workers in the GCC</div>
             <p class="pcard-desc">Examining structural exploitation, diplomatic shortcomings, and policy failures, calling for a rights-based foreign policy and stronger embassy accountability.</p>
-            <div class="pcard-pub"><strong>National Policy Forum</strong></div>
+            <div class="pcard-pub">National Policy Forum</div>
             <div class="pcard-foot"><span>Read more</span><i class="bi bi-arrow-up-right"></i></div>
           </div>
         </div>
@@ -555,8 +555,12 @@
       }
 
       function resize() {
-        W = canvas.width  = canvas.offsetWidth;
-        H = canvas.height = canvas.offsetHeight;
+        const dpr = window.devicePixelRatio || 1;
+        W = canvas.offsetWidth;
+        H = canvas.offsetHeight;
+        canvas.width  = W * dpr;
+        canvas.height = H * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
 
       function initNodes() {

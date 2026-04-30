@@ -340,8 +340,14 @@
 
 .pcard-pub {
   margin-top: auto;
-  font-size: 0.78rem;
+  font-size: 0.68rem;
+  font-weight: 700;
   color: var(--muted2);
+  text-align: right;
+}
+
+.pcard-pub::before {
+  content: '— ';
 }
 
 .pcard-foot {
