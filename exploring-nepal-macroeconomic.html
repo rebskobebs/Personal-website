@@ -1,0 +1,1035 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nepal Macro Indicators — Sparsh Adhikari</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { -webkit-font-smoothing: antialiased; }
+      body {
+        background: #f3f4f6;
+        color: #111111;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-weight: 300;
+        line-height: 1.7;
+      }
+      button, input, select { font: inherit; cursor: pointer; }
+
+      .page { width: min(1180px, calc(100% - 28px)); margin: 0 auto; padding: 28px 0; }
+
+      .panel, .hero {
+        background: #ffffff;
+        border: 1px solid rgba(17,17,17,0.09);
+      }
+      .hero { margin-bottom: 14px; padding: 28px 32px; }
+      h1 {
+        margin-bottom: 8px;
+        font-size: clamp(1.7rem, 4vw, 2.5rem);
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+      }
+      h2 { margin-bottom: 12px; font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; }
+      h3 { margin-bottom: 8px; font-size: 0.88rem; font-weight: 600; }
+      .muted { color: #6b7280; font-size: 0.88rem; }
+      .status {
+        margin: 10px 0 0;
+        color: #003087;
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .grid { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 14px; }
+      .panel { padding: 20px; }
+      .filters { position: sticky; top: 14px; align-self: start; }
+      .section { margin-bottom: 20px; }
+
+      .label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 0.62rem;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #6b7280;
+      }
+      .input, .select {
+        width: 100%;
+        border: 1px solid rgba(17,17,17,0.18);
+        padding: 8px 10px;
+        background: #f3f4f6;
+        color: #111111;
+        font-size: 0.82rem;
+      }
+      .input:focus, .select:focus { outline: 2px solid #003087; outline-offset: 2px; }
+
+      .btn-row { display: flex; flex-wrap: wrap; gap: 8px; }
+      .btn {
+        border: 1px solid transparent;
+        background: #111111;
+        color: #fff;
+        padding: 8px 14px;
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        transition: filter 0.15s, border-color 0.15s, color 0.15s;
+      }
+      .btn:hover { filter: brightness(1.18); }
+      .btn.blue { background: #003087; }
+      .btn.light { background: #fff; border-color: rgba(17,17,17,0.18); color: #111111; }
+      .btn.light:hover { filter: none; border-color: #003087; color: #003087; }
+
+      .indicator-list { display: grid; gap: 6px; max-height: 420px; overflow: auto; padding-right: 4px; }
+      .indicator {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        border: 1px solid rgba(17,17,17,0.09);
+        padding: 10px;
+        transition: border-color 0.15s;
+      }
+      .indicator:hover { border-color: rgba(17,17,17,0.2); }
+      .indicator-main { display: grid; grid-template-columns: 18px 1fr; gap: 9px; }
+      .indicator input { margin-top: 2px; accent-color: #003087; }
+      .indicator span { display: block; font-size: 0.8rem; font-weight: 600; color: #111111; }
+      .indicator small { display: block; margin-top: 2px; color: #6b7280; font-size: 0.72rem; font-weight: 300; }
+      .unit-box { margin-left: 27px; border-top: 1px solid rgba(17,17,17,0.08); padding-top: 8px; }
+      .unit-box label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 0.62rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #6b7280;
+      }
+
+      .topbar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+      .chart-title { margin-bottom: 3px; }
+      .axis-legend { display: grid; gap: 8px; margin: 10px 0 14px; }
+      .axis-pill {
+        display: inline-flex;
+        width: fit-content;
+        padding: 4px 10px;
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .axis-left { background: rgba(0,48,135,0.08); color: #003087; }
+      .axis-right { background: rgba(17,17,17,0.06); color: #374151; }
+      .axis-items { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 5px; }
+      .axis-item {
+        border: 1px solid rgba(17,17,17,0.12);
+        padding: 3px 8px;
+        color: #374151;
+        font-size: 0.7rem;
+      }
+
+      .chart-wrap { position: relative; }
+      canvas {
+        display: block;
+        width: 100%;
+        height: 430px;
+        border: 1px solid rgba(17,17,17,0.09);
+        background: #fff;
+      }
+
+      .tooltip {
+        position: absolute;
+        z-index: 5;
+        max-width: 280px;
+        border: 1px solid rgba(17,17,17,0.18);
+        background: rgba(255,255,255,0.98);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+        padding: 10px 14px;
+        pointer-events: none;
+        transform: translate(12px, 12px);
+      }
+      .tooltip.hidden { display: none; }
+      .tooltip strong, .tooltip span { display: block; }
+      .tooltip strong { font-size: 0.88rem; font-weight: 700; margin-bottom: 4px; }
+      .tooltip span { color: #6b7280; font-size: 0.75rem; }
+
+      .summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 14px 0; }
+      .metric strong { display: block; margin: 6px 0; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.03em; }
+
+      .sources { margin: 0; padding-left: 20px; }
+      .sources li { margin: 6px 0; font-size: 0.82rem; }
+      .sources a { color: #003087; font-weight: 600; text-decoration: none; }
+      .sources a:hover { text-decoration: underline; }
+
+      .table-wrap { margin-top: 14px; overflow: auto; }
+      table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 0.78rem; }
+      th, td { border-bottom: 1px solid rgba(17,17,17,0.09); padding: 9px 12px; text-align: left; }
+      th {
+        background: #f3f4f6;
+        font-weight: 600;
+        font-size: 0.62rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #6b7280;
+      }
+
+      @media (max-width: 900px) {
+        .grid, .summary { grid-template-columns: 1fr; }
+        .filters { position: static; }
+        canvas { height: 350px; }
+        .hero { padding: 20px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <h1>Nepal Macroeconomic Indicators</h1>
+        <p class="muted">
+          Select macro indicators, compare them over time, and open the original World Bank dataset when needed.
+          The page uses live World Bank data and falls back to sample data only if the API is unavailable.
+        </p>
+        <p id="status" class="status">Loading official World Bank data...</p>
+      </header>
+
+      <main class="grid">
+        <aside class="panel filters">
+          <h2>Controls</h2>
+
+          <div class="section">
+            <span class="label">Quick select</span>
+            <div class="btn-row">
+              <button class="btn light" id="select-all">All 10</button>
+              <button class="btn light" id="select-core">Core 3</button>
+              <button class="btn light" id="clear">Clear</button>
+            </div>
+          </div>
+
+          <div class="section">
+            <label class="label" for="chart-type">Graph type</label>
+            <select class="select" id="chart-type">
+              <option value="line">Trend line over time</option>
+              <option value="latest-bar">Latest-year bar comparison</option>
+              <option value="area">Area trend over time</option>
+              <option value="scatter">Relationship scatterplot</option>
+            </select>
+          </div>
+
+          <div class="section">
+            <label class="label" for="compare-mode">Compare mode</label>
+            <select class="select" id="compare-mode">
+              <option value="actual">Actual values</option>
+              <option value="indexed">Index first year = 100</option>
+              <option value="percent-change">Percent change from first year</option>
+            </select>
+          </div>
+
+          <div class="section">
+            <label class="label" for="start-year">Start year</label>
+            <input class="input" id="start-year" type="number" value="2000" />
+          </div>
+
+          <div class="section">
+            <label class="label" for="end-year">End year</label>
+            <input class="input" id="end-year" type="number" value="2024" />
+          </div>
+
+          <div class="section">
+            <span class="label">Indicators</span>
+            <div id="indicator-list" class="indicator-list"></div>
+          </div>
+        </aside>
+
+        <section>
+          <div class="panel">
+            <div class="topbar">
+              <div>
+                <h2 id="chart-title" class="chart-title">Macro trends over time</h2>
+                <p id="chart-subtitle" class="muted">Choose indicators to draw the graph.</p>
+                <p id="unit-warning" class="muted"></p>
+                <div id="axis-legend" class="axis-legend"></div>
+              </div>
+              <div class="btn-row">
+                <button class="btn blue" id="download-csv">Download selected CSV</button>
+                <button class="btn" id="download-png">Download chart PNG</button>
+              </div>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="chart" width="1200" height="620"></canvas>
+              <div id="tooltip" class="tooltip hidden"></div>
+            </div>
+          </div>
+
+          <div id="summary" class="summary"></div>
+
+          <div class="panel">
+            <h2>Sources</h2>
+            <p class="muted">Access original World Bank data here:</p>
+            <ul id="sources" class="sources"></ul>
+          </div>
+
+          <div class="panel table-wrap">
+            <h2>Selected Data Preview</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>Indicator</th>
+                  <th>Value</th>
+                  <th>Unit</th>
+                  <th>Code</th>
+                </tr>
+              </thead>
+              <tbody id="data-table"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const country = "NPL";
+      const colors = ["#1d4ed8", "#047857", "#b91c1c", "#7c3aed", "#c2410c", "#0f766e", "#be123c", "#4f46e5", "#a16207", "#0369a1"];
+
+      const indicators = [
+        { id: "gdp", name: "GDP", why: "Size of the economy", percentCode: "NY.GDP.MKTP.CD", usdCode: "NY.GDP.MKTP.CD", percentUnit: "current US$", usdUnit: "current US$" },
+        { id: "growth", name: "GDP growth", why: "Real economic growth", percentCode: "NY.GDP.MKTP.KD.ZG", usdCode: "NY.GDP.MKTP.KD.ZG", percentUnit: "annual %", usdUnit: "annual %" },
+        { id: "gdp_pc", name: "GDP per capita", why: "Average income level", percentCode: "NY.GDP.PCAP.CD", usdCode: "NY.GDP.PCAP.CD", percentUnit: "current US$", usdUnit: "current US$" },
+        { id: "inflation", name: "Inflation", why: "Price stability", percentCode: "FP.CPI.TOTL.ZG", usdCode: "FP.CPI.TOTL.ZG", percentUnit: "annual %", usdUnit: "annual %" },
+        { id: "unemployment", name: "Unemployment", why: "Labor market stress", percentCode: "SL.UEM.TOTL.ZS", usdCode: "SL.UEM.TOTL.ZS", percentUnit: "% of labor force", usdUnit: "% of labor force" },
+        { id: "exports", name: "Exports", why: "External sales exposure", percentCode: "NE.EXP.GNFS.ZS", usdCode: "NE.EXP.GNFS.CD", percentUnit: "% of GDP", usdUnit: "current US$" },
+        { id: "imports", name: "Imports", why: "External dependency", percentCode: "NE.IMP.GNFS.ZS", usdCode: "NE.IMP.GNFS.CD", percentUnit: "% of GDP", usdUnit: "current US$" },
+        { id: "current_account", name: "Current account balance", why: "External surplus or deficit", percentCode: "BN.CAB.XOKA.GD.ZS", usdCode: "BN.CAB.XOKA.CD", percentUnit: "% of GDP", usdUnit: "current US$" },
+        { id: "fdi", name: "FDI net inflows", why: "Foreign investment flow", percentCode: "BX.KLT.DINV.WD.GD.ZS", usdCode: "BX.KLT.DINV.CD.WD", percentUnit: "% of GDP", usdUnit: "current US$" },
+        { id: "remittances", name: "Remittances received", why: "Household foreign income", percentCode: "BX.TRF.PWKR.DT.GD.ZS", usdCode: "BX.TRF.PWKR.CD.DT", percentUnit: "% of GDP", usdUnit: "current US$" },
+      ];
+
+      const allCodes = [...new Set(indicators.flatMap((item) => [item.percentCode, item.usdCode]))];
+
+      const fallbackRows = [
+        ["NY.GDP.MKTP.CD", 2020, 33433416764], ["NY.GDP.MKTP.CD", 2021, 36924802842], ["NY.GDP.MKTP.CD", 2022, 40828247302], ["NY.GDP.MKTP.CD", 2023, 40908389452],
+        ["NY.GDP.MKTP.KD.ZG", 2020, -2.4], ["NY.GDP.MKTP.KD.ZG", 2021, 4.8], ["NY.GDP.MKTP.KD.ZG", 2022, 5.6], ["NY.GDP.MKTP.KD.ZG", 2023, 2.0],
+        ["NY.GDP.PCAP.CD", 2020, 1139], ["NY.GDP.PCAP.CD", 2021, 1223], ["NY.GDP.PCAP.CD", 2022, 1337], ["NY.GDP.PCAP.CD", 2023, 1372],
+        ["FP.CPI.TOTL.ZG", 2020, 6.15], ["FP.CPI.TOTL.ZG", 2021, 3.6], ["FP.CPI.TOTL.ZG", 2022, 6.32], ["FP.CPI.TOTL.ZG", 2023, 7.74],
+        ["SL.UEM.TOTL.ZS", 2020, 13.1], ["SL.UEM.TOTL.ZS", 2021, 12.2], ["SL.UEM.TOTL.ZS", 2022, 11.1], ["SL.UEM.TOTL.ZS", 2023, 10.7],
+        ["NE.EXP.GNFS.ZS", 2020, 6.7], ["NE.EXP.GNFS.ZS", 2021, 6.9], ["NE.EXP.GNFS.ZS", 2022, 6.8], ["NE.EXP.GNFS.ZS", 2023, 6.6],
+        ["NE.IMP.GNFS.ZS", 2020, 36.2], ["NE.IMP.GNFS.ZS", 2021, 41.3], ["NE.IMP.GNFS.ZS", 2022, 41.0], ["NE.IMP.GNFS.ZS", 2023, 36.9],
+        ["BN.CAB.XOKA.GD.ZS", 2020, -0.9], ["BN.CAB.XOKA.GD.ZS", 2021, -7.7], ["BN.CAB.XOKA.GD.ZS", 2022, -12.6], ["BN.CAB.XOKA.GD.ZS", 2023, -0.8],
+        ["BX.KLT.DINV.WD.GD.ZS", 2020, 0.4], ["BX.KLT.DINV.WD.GD.ZS", 2021, 0.5], ["BX.KLT.DINV.WD.GD.ZS", 2022, 0.4], ["BX.KLT.DINV.WD.GD.ZS", 2023, 0.2],
+        ["BX.TRF.PWKR.DT.GD.ZS", 2020, 24.1], ["BX.TRF.PWKR.DT.GD.ZS", 2021, 22.8], ["BX.TRF.PWKR.DT.GD.ZS", 2022, 22.1], ["BX.TRF.PWKR.DT.GD.ZS", 2023, 26.6],
+      ].map(([code, year, value]) => makeRow(code, year, value, "Fallback sample"));
+
+      const state = {
+        rows: [],
+        selected: ["gdp", "growth", "inflation"],
+        units: {},
+        points: [],
+        hover: null,
+      };
+
+      const $ = (id) => document.getElementById(id);
+      const els = {
+        status: $("status"),
+        indicatorList: $("indicator-list"),
+        chartType: $("chart-type"),
+        compareMode: $("compare-mode"),
+        startYear: $("start-year"),
+        endYear: $("end-year"),
+        title: $("chart-title"),
+        subtitle: $("chart-subtitle"),
+        warning: $("unit-warning"),
+        axisLegend: $("axis-legend"),
+        canvas: $("chart"),
+        tooltip: $("tooltip"),
+        summary: $("summary"),
+        sources: $("sources"),
+        table: $("data-table"),
+      };
+
+      function indicator(id) {
+        return indicators.find((item) => item.id === id);
+      }
+
+      function activeCode(item) {
+        return state.units[item.id] === "usd" ? item.usdCode : item.percentCode;
+      }
+
+      function activeUnit(item) {
+        return state.units[item.id] === "usd" ? item.usdUnit : item.percentUnit;
+      }
+
+      function indicatorByCode(code) {
+        return indicators.find((item) => item.percentCode === code || item.usdCode === code);
+      }
+
+      function hasUnitChoice(item) {
+        return item.percentCode !== item.usdCode;
+      }
+
+      function makeRow(code, year, value, source) {
+        const item = indicatorByCode(code);
+        const unit = code === item.usdCode ? item.usdUnit : item.percentUnit;
+        return { id: item.id, code, year: Number(year), value: Number(value), name: item.name, unit, source };
+      }
+
+      function apiUrl(code) {
+        return `https://api.worldbank.org/v2/country/${country}/indicator/${code}?format=json&per_page=200`;
+      }
+
+      function dataUrl(code) {
+        return `https://data.worldbank.org/indicator/${code}?locations=NP`;
+      }
+
+      function fmt(value) {
+        const abs = Math.abs(value);
+        if (abs >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
+        if (abs >= 1e6) return `$${(value / 1e6).toFixed(1)}M`;
+        return Number(value).toLocaleString(undefined, { maximumFractionDigits: 2 });
+      }
+
+      function unitGroup(id) {
+        const unit = activeUnit(indicator(id)).toLowerCase();
+        if (unit.includes("us$")) return "current US$";
+        if (unit.includes("labor force")) return "% of labor force";
+        if (unit.includes("gdp")) return "% of GDP";
+        if (unit.includes("annual %")) return "annual %";
+        if (unit.includes("%")) return "%";
+        return activeUnit(indicator(id));
+      }
+
+      function selectedRows() {
+        const start = Number(els.startYear.value);
+        const end = Number(els.endYear.value);
+        return state.rows
+          .filter((row) => state.selected.includes(row.id) && row.code === activeCode(indicator(row.id)) && row.year >= start && row.year <= end)
+          .sort((a, b) => a.year - b.year || a.name.localeCompare(b.name));
+      }
+
+      function displayRows() {
+        const rows = selectedRows();
+        if (els.compareMode.value === "actual") return rows.map((row) => ({ ...row, displayValue: row.value }));
+
+        const first = {};
+        rows.forEach((row) => {
+          if (!first[row.id] && row.value !== 0) first[row.id] = row.value;
+        });
+
+        return rows.map((row) => ({
+          ...row,
+          displayValue:
+            els.compareMode.value === "indexed"
+              ? (row.value / first[row.id]) * 100
+              : ((row.value - first[row.id]) / first[row.id]) * 100,
+        }));
+      }
+
+      function axisConfig(rows) {
+        const ids = state.selected.filter((id) => rows.some((row) => row.id === id));
+        const axisForId = Object.fromEntries(ids.map((id) => [id, "left"]));
+        if (els.compareMode.value !== "actual" || ids.length < 2) return { dual: false, axisForId, left: ids, right: [] };
+
+        const groups = {};
+        ids.forEach((id) => {
+          groups[unitGroup(id)] ||= [];
+          groups[unitGroup(id)].push(id);
+        });
+
+        const groupList = Object.values(groups).sort((a, b) => maxAbs(rows, b) - maxAbs(rows, a));
+        if (groupList.length > 1) {
+          groupList[0].forEach((id) => (axisForId[id] = "left"));
+          groupList.slice(1).flat().forEach((id) => (axisForId[id] = "right"));
+          return { dual: true, axisForId, left: groupList[0], right: groupList.slice(1).flat() };
+        }
+
+        if (ids.length === 2) {
+          const ratio = maxAbs(rows, [ids[0]]) / Math.max(maxAbs(rows, [ids[1]]), 1);
+          if (ratio >= 25 || ratio <= 1 / 25) {
+            axisForId[ids[1]] = "right";
+            return { dual: true, axisForId, left: [ids[0]], right: [ids[1]] };
+          }
+        }
+
+        return { dual: false, axisForId, left: ids, right: [] };
+      }
+
+      function maxAbs(rows, ids) {
+        return Math.max(...rows.filter((row) => ids.includes(row.id)).map((row) => Math.abs(row.displayValue)), 0);
+      }
+
+      function scale(values) {
+        let min = Math.min(...values);
+        let max = Math.max(...values);
+        if (min === max) {
+          min -= 1;
+          max += 1;
+        }
+        const gap = (max - min) * 0.1;
+        return { min: min - gap, max: max + gap };
+      }
+
+      function axisText(ids) {
+        return [...new Set(ids.map(unitGroup))].join(" / ");
+      }
+
+      function shortNames(ids) {
+        const names = ids.map((id) => indicator(id).name);
+        return names.length > 2 ? `${names.slice(0, 2).join(", ")} +${names.length - 2} more` : names.join(", ");
+      }
+
+      function renderControls() {
+        els.indicatorList.innerHTML = indicators
+          .map(
+            (item) => `
+              <div class="indicator">
+                <label class="indicator-main">
+                  <input type="checkbox" value="${item.id}" ${state.selected.includes(item.id) ? "checked" : ""}>
+                  <span>${item.name}<small>${activeUnit(item)} - ${item.why}</small></span>
+                </label>
+                ${
+                  state.selected.includes(item.id) && hasUnitChoice(item)
+                    ? `
+                      <div class="unit-box">
+                        <label for="unit-${item.id}">View ${item.name} as</label>
+                        <select id="unit-${item.id}" class="select unit-choice" data-unit-id="${item.id}">
+                          <option value="percent" ${state.units[item.id] !== "usd" ? "selected" : ""}>% of GDP</option>
+                          <option value="usd" ${state.units[item.id] === "usd" ? "selected" : ""}>current US$</option>
+                        </select>
+                      </div>
+                    `
+                    : ""
+                }
+              </div>
+            `,
+          )
+          .join("");
+
+        els.indicatorList.querySelectorAll("input").forEach((input) => {
+          input.addEventListener("change", () => {
+            state.selected = input.checked
+              ? [...new Set([...state.selected, input.value])]
+              : state.selected.filter((id) => id !== input.value);
+            render();
+          });
+        });
+
+        els.indicatorList.querySelectorAll("[data-unit-id]").forEach((select) => {
+          select.addEventListener("change", (event) => {
+            state.units[event.target.dataset.unitId] = event.target.value;
+            render();
+          });
+        });
+      }
+
+      function renderAxisLegend(config) {
+        const group = (side, ids, className) =>
+          ids.length
+            ? `
+              <div>
+                <span class="axis-pill ${className}">${side} y-axis: ${axisText(ids)}</span>
+                <div class="axis-items">
+                  ${ids.map((id) => `<span class="axis-item">${indicator(id).name} - ${activeUnit(indicator(id))}</span>`).join("")}
+                </div>
+              </div>
+            `
+            : "";
+
+        els.axisLegend.innerHTML = config.dual
+          ? group("Left", config.left, "axis-left") + group("Right", config.right, "axis-right")
+          : group("Left", config.left, "axis-left");
+      }
+
+      function drawAxisNumbers(ctx, sc, x, pad, plotH, align) {
+        ctx.fillStyle = "#667085";
+        ctx.font = "13px sans-serif";
+        ctx.textAlign = align;
+        for (let i = 0; i <= 5; i++) {
+          const y = pad.top + (i / 5) * plotH;
+          const value = sc.max - (i / 5) * (sc.max - sc.min);
+          ctx.fillText(fmt(value), x, y + 4);
+        }
+        ctx.textAlign = "left";
+      }
+
+      function rotateLabel(ctx, text, x, y, color) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(-Math.PI / 2);
+        ctx.fillStyle = color;
+        ctx.font = "bold 14px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(text, 0, 0);
+        ctx.restore();
+      }
+
+      function drawMessage(ctx, text) {
+        ctx.fillStyle = "#667085";
+        ctx.font = "24px sans-serif";
+        ctx.fillText(text, 90, 130);
+      }
+
+      function drawScatter(ctx, rows, w, h) {
+        const selected = state.selected.filter((id) => rows.some((row) => row.id === id));
+        if (selected.length !== 2) {
+          drawMessage(ctx, "Scatterplot needs exactly two selected indicators.");
+          return;
+        }
+
+        const [xId, yId] = selected;
+        const xRows = Object.fromEntries(rows.filter((row) => row.id === xId).map((row) => [row.year, row]));
+        const pairs = rows
+          .filter((row) => row.id === yId && xRows[row.year])
+          .map((row) => ({ year: row.year, xRow: xRows[row.year], yRow: row }));
+
+        if (!pairs.length) {
+          drawMessage(ctx, "No overlapping years for these two indicators.");
+          return;
+        }
+
+        const pad = { top: 54, right: 42, bottom: 92, left: 112 };
+        const plotW = w - pad.left - pad.right;
+        const plotH = h - pad.top - pad.bottom;
+        const xScale = scale(pairs.map((pair) => pair.xRow.displayValue));
+        const yScale = scale(pairs.map((pair) => pair.yRow.displayValue));
+        const x = (value) => pad.left + ((value - xScale.min) / (xScale.max - xScale.min)) * plotW;
+        const y = (value) => pad.top + ((yScale.max - value) / (yScale.max - yScale.min)) * plotH;
+
+        ctx.strokeStyle = "#e5e9f0";
+        ctx.lineWidth = 1;
+        for (let i = 0; i <= 5; i++) {
+          const gx = pad.left + (i / 5) * plotW;
+          const gy = pad.top + (i / 5) * plotH;
+          ctx.beginPath();
+          ctx.moveTo(gx, pad.top);
+          ctx.lineTo(gx, pad.top + plotH);
+          ctx.moveTo(pad.left, gy);
+          ctx.lineTo(pad.left + plotW, gy);
+          ctx.stroke();
+        }
+
+        drawAxisNumbers(ctx, yScale, pad.left - 12, pad, plotH, "right");
+        ctx.fillStyle = "#667085";
+        ctx.font = "13px sans-serif";
+        ctx.textAlign = "center";
+        for (let i = 0; i <= 5; i++) {
+          const value = xScale.min + (i / 5) * (xScale.max - xScale.min);
+          ctx.fillText(fmt(value), pad.left + (i / 5) * plotW, h - 46);
+        }
+
+        ctx.fillStyle = "#344054";
+        ctx.font = "bold 14px sans-serif";
+        ctx.fillText(`${indicator(xId).name} (${activeUnit(indicator(xId))})`, pad.left + plotW / 2, h - 16);
+        rotateLabel(ctx, `${indicator(yId).name} (${activeUnit(indicator(yId))})`, 28, pad.top + plotH / 2, "#344054");
+        ctx.textAlign = "left";
+
+        pairs.forEach((pair) => {
+          const px = x(pair.xRow.displayValue);
+          const py = y(pair.yRow.displayValue);
+          ctx.fillStyle = colors[1];
+          ctx.beginPath();
+          ctx.arc(px, py, 6, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = "#667085";
+          ctx.font = "12px sans-serif";
+          ctx.fillText(pair.year, px + 8, py - 8);
+          state.points.push({
+            ...pair.yRow,
+            x: px,
+            y: py,
+            color: colors[1],
+            axis: "scatter",
+            xName: pair.xRow.name,
+            xValue: pair.xRow.value,
+            xUnit: pair.xRow.unit,
+          });
+        });
+      }
+
+      function drawChart() {
+        const rows = displayRows();
+        const config = axisConfig(rows);
+        const ctx = els.canvas.getContext("2d");
+        const w = els.canvas.width;
+        const h = els.canvas.height;
+        const pad = { top: 54, right: config.dual ? 112 : 36, bottom: 82, left: 108 };
+        const plotW = w - pad.left - pad.right;
+        const plotH = h - pad.top - pad.bottom;
+        const years = [...new Set(rows.map((row) => row.year))].sort((a, b) => a - b);
+        const x = (year) => pad.left + (years.length === 1 ? plotW / 2 : (years.indexOf(year) / (years.length - 1)) * plotW);
+
+        state.points = [];
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(0, 0, w, h);
+
+        if (!rows.length) {
+          drawMessage(ctx, "Select at least one indicator with available data.");
+          return;
+        }
+
+        if (els.chartType.value === "scatter") {
+          drawScatter(ctx, rows, w, h);
+          return;
+        }
+
+        const leftScale = scale(rows.filter((row) => config.axisForId[row.id] === "left").map((row) => row.displayValue));
+        const rightScale = config.dual
+          ? scale(rows.filter((row) => config.axisForId[row.id] === "right").map((row) => row.displayValue))
+          : leftScale;
+        const getScale = (id) => (config.axisForId[id] === "right" ? rightScale : leftScale);
+        const y = (value, sc) => pad.top + ((sc.max - value) / (sc.max - sc.min)) * plotH;
+        const yRow = (row) => y(row.displayValue, getScale(row.id));
+        const yBase = (id) => {
+          const sc = getScale(id);
+          return y(Math.min(Math.max(0, sc.min), sc.max), sc);
+        };
+
+        ctx.strokeStyle = "#e5e9f0";
+        ctx.lineWidth = 1;
+        for (let i = 0; i <= 5; i++) {
+          const gy = pad.top + (i / 5) * plotH;
+          ctx.beginPath();
+          ctx.moveTo(pad.left, gy);
+          ctx.lineTo(w - pad.right, gy);
+          ctx.stroke();
+        }
+
+        drawAxisNumbers(ctx, leftScale, pad.left - 12, pad, plotH, "right");
+        if (config.dual) drawAxisNumbers(ctx, rightScale, w - pad.right + 12, pad, plotH, "left");
+        rotateLabel(ctx, axisText(config.left), 26, pad.top + plotH / 2, config.dual ? colors[0] : "#344054");
+        if (config.dual) rotateLabel(ctx, axisText(config.right), w - 24, pad.top + plotH / 2, colors[1]);
+
+        ctx.fillStyle = "#667085";
+        ctx.font = "13px sans-serif";
+        years.forEach((year) => ctx.fillText(year, x(year) - 14, h - 26));
+        ctx.fillStyle = "#344054";
+        ctx.font = "bold 14px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("Year", pad.left + plotW / 2, h - 12);
+        ctx.textAlign = "left";
+
+        state.selected.forEach((id, index) => {
+          const series = rows.filter((row) => row.id === id).sort((a, b) => a.year - b.year);
+          const color = colors[index % colors.length];
+          ctx.strokeStyle = color;
+          ctx.fillStyle = color;
+          ctx.lineWidth = 3;
+
+          if (els.chartType.value === "latest-bar") {
+            const latestYear = Math.max(...years);
+            const latestRows = rows.filter((row) => row.year === latestYear);
+            const barW = Math.max(18, plotW / Math.max(latestRows.length * 1.6, 1));
+            series.forEach((row) => {
+              if (row.year !== latestYear) return;
+              const latestIndex = latestRows.findIndex((item) => item.id === row.id);
+              const bx = pad.left + latestIndex * barW * 1.45 + barW;
+              const by = yRow(row);
+              const base = yBase(row.id);
+              ctx.fillRect(bx, Math.min(by, base), barW, Math.max(2, Math.abs(base - by)));
+              ctx.fillStyle = "#344054";
+              ctx.font = "12px sans-serif";
+              ctx.save();
+              ctx.translate(bx + barW / 2, h - 34);
+              ctx.rotate(-Math.PI / 5);
+              ctx.fillText(indicator(row.id).name, 0, 0);
+              ctx.restore();
+              ctx.fillStyle = color;
+              state.points.push({ ...row, color, x: bx + barW / 2, y: by, axis: config.axisForId[row.id] });
+            });
+          } else {
+            ctx.beginPath();
+            series.forEach((row, i) => (i ? ctx.lineTo(x(row.year), yRow(row)) : ctx.moveTo(x(row.year), yRow(row))));
+            ctx.stroke();
+
+            if (els.chartType.value === "area" && series.length) {
+              const base = yBase(id);
+              ctx.lineTo(x(series.at(-1).year), base);
+              ctx.lineTo(x(series[0].year), base);
+              ctx.closePath();
+              ctx.globalAlpha = 0.12;
+              ctx.fill();
+              ctx.globalAlpha = 1;
+            }
+
+            series.forEach((row) => {
+              const px = x(row.year);
+              const py = yRow(row);
+              ctx.beginPath();
+              ctx.arc(px, py, 4, 0, Math.PI * 2);
+              ctx.fill();
+              state.points.push({ ...row, color, x: px, y: py, axis: config.axisForId[row.id] });
+            });
+          }
+        });
+
+        let legendX = pad.left;
+        state.selected.forEach((id, index) => {
+          ctx.fillStyle = colors[index % colors.length];
+          ctx.fillRect(legendX, 16, 12, 12);
+          ctx.fillStyle = "#344054";
+          ctx.fillText(indicator(id).name, legendX + 18, 27);
+          legendX += Math.min(190, indicator(id).name.length * 8 + 58);
+        });
+
+        if (config.dual) {
+          ctx.fillStyle = colors[0];
+          ctx.font = "bold 13px sans-serif";
+          ctx.fillText(`Left axis: ${shortNames(config.left)} (${axisText(config.left)})`, pad.left, h - 42);
+          ctx.fillStyle = colors[1];
+          ctx.textAlign = "right";
+          ctx.fillText(`Right axis: ${shortNames(config.right)} (${axisText(config.right)})`, w - pad.right, h - 42);
+          ctx.textAlign = "left";
+        }
+
+        if (state.hover) {
+          ctx.beginPath();
+          ctx.fillStyle = "#fff";
+          ctx.strokeStyle = state.hover.color;
+          ctx.lineWidth = 3;
+          ctx.arc(state.hover.x, state.hover.y, 8, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+          ctx.setLineDash([4, 4]);
+          ctx.strokeStyle = "#94a3b8";
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(state.hover.x, pad.top);
+          ctx.lineTo(state.hover.x, pad.top + plotH);
+          ctx.stroke();
+          ctx.setLineDash([]);
+        }
+      }
+
+      function renderSummary() {
+        els.summary.innerHTML = state.selected
+          .slice(0, 6)
+          .map((id) => {
+            const item = indicator(id);
+            const code = activeCode(item);
+            const series = state.rows.filter((row) => row.id === id && row.code === code);
+            const last = series.at(-1);
+            if (!last) return `<article class="panel metric"><h3>${indicator(id).name}</h3><p class="muted">No data</p></article>`;
+            const comparisonRows = [1, 2, 3]
+              .map((yearsAgo) => {
+                const targetYear = last.year - yearsAgo;
+                const base = series.find((row) => row.year === targetYear);
+                if (!base || !base.value) return `<p class="muted">From ${targetYear}: no data</p>`;
+                const change = ((last.value - base.value) / Math.abs(base.value)) * 100;
+                return `<p class="muted">From ${targetYear}: ${change >= 0 ? "+" : ""}${change.toFixed(1)}%</p>`;
+              })
+              .join("");
+            return `
+              <article class="panel metric">
+                <h3>${last.name}</h3>
+                <strong>${fmt(last.value)}</strong>
+                <p class="muted">${last.year} - ${last.unit}</p>
+                ${comparisonRows}
+              </article>
+            `;
+          })
+          .join("");
+      }
+
+      function renderSources() {
+        els.sources.innerHTML = indicators
+          .map(
+            (item) => `
+              <li>
+                <a href="${dataUrl(activeCode(item))}" target="_blank" rel="noreferrer">${item.name}</a>
+                <span class="muted"> - ${activeUnit(item)}</span>
+              </li>
+            `,
+          )
+          .join("");
+      }
+
+      function renderTable() {
+        els.table.innerHTML = selectedRows()
+          .slice()
+          .reverse()
+          .map(
+            (row) => `
+              <tr>
+                <td>${row.year}</td>
+                <td>${row.name}</td>
+                <td>${fmt(row.value)}</td>
+                <td>${row.unit}</td>
+                <td>${row.code}</td>
+              </tr>
+            `,
+          )
+          .join("");
+      }
+
+      function render() {
+        if (Number(els.startYear.value) > Number(els.endYear.value)) els.endYear.value = els.startYear.value;
+        state.hover = null;
+        els.tooltip.classList.add("hidden");
+
+        const rows = displayRows();
+        const config = axisConfig(rows);
+        const names = state.selected.map((id) => indicator(id).name);
+        const mixedUnits = new Set(state.selected.map((id) => activeUnit(indicator(id)))).size > 1;
+        const chartDescriptions = {
+          line: "Trend line: best for seeing direction over time.",
+          "latest-bar": "Latest-year bar: best for comparing the most recent available values.",
+          area: "Area trend: useful for showing magnitude over time for one or a few indicators.",
+          scatter: "Scatterplot: best for checking the relationship between exactly two indicators.",
+        };
+
+        els.title.textContent = names.length ? names.join(", ") : "No indicators selected";
+        els.subtitle.textContent = `${chartDescriptions[els.chartType.value]} ${els.compareMode.options[els.compareMode.selectedIndex].text} - ${els.startYear.value} to ${els.endYear.value}`;
+        els.warning.textContent = config.dual
+          ? "Auto dual-axis is active because selected indicators use different units or denominators."
+          : els.compareMode.value === "actual" && mixedUnits
+            ? "Mixed units are selected. Use indexed or percent-change mode for a cleaner comparison."
+            : "";
+
+        renderControls();
+        renderAxisLegend(config);
+        drawChart();
+        renderSummary();
+        renderTable();
+      }
+
+      function downloadCsv() {
+        const header = ["year", "indicator", "value", "unit", "code"];
+        const rows = selectedRows().map((row) => [row.year, row.name, row.value, row.unit, row.code]);
+        const csv = [header, ...rows].map((row) => row.map((cell) => `"${String(cell).replaceAll('"', '""')}"`).join(",")).join("\n");
+        download(`nepal-macro-indicators-${els.startYear.value}-${els.endYear.value}.csv`, csv, "text/csv;charset=utf-8");
+      }
+
+      function downloadPng() {
+        const link = document.createElement("a");
+        link.download = `nepal-macro-chart-${els.startYear.value}-${els.endYear.value}.png`;
+        link.href = els.canvas.toDataURL("image/png");
+        link.click();
+      }
+
+      function download(filename, content, type) {
+        const blob = new Blob([content], { type });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        link.click();
+        URL.revokeObjectURL(link.href);
+      }
+
+      function bothUnitLines(point) {
+        const item = indicator(point.id);
+        if (!hasUnitChoice(item)) return "";
+
+        const percentRow = state.rows.find((row) => row.id === point.id && row.code === item.percentCode && row.year === point.year);
+        const usdRow = state.rows.find((row) => row.id === point.id && row.code === item.usdCode && row.year === point.year);
+        const lines = [];
+        if (percentRow) lines.push(`<span>% of GDP: ${fmt(percentRow.value)} ${percentRow.unit}</span>`);
+        if (usdRow) lines.push(`<span>Amount: ${fmt(usdRow.value)} ${usdRow.unit}</span>`);
+        return lines.join("");
+      }
+
+      function hoverChart(event) {
+        const rect = els.canvas.getBoundingClientRect();
+        const mouse = {
+          x: ((event.clientX - rect.left) / rect.width) * els.canvas.width,
+          y: ((event.clientY - rect.top) / rect.height) * els.canvas.height,
+          cssX: event.clientX - rect.left,
+          cssY: event.clientY - rect.top,
+        };
+        const nearest = state.points.reduce(
+          (best, point) => {
+            const distance = Math.hypot(point.x - mouse.x, point.y - mouse.y);
+            return distance < best.distance ? { point, distance } : best;
+          },
+          { point: null, distance: Infinity },
+        );
+
+        if (!nearest.point || nearest.distance > 22) return clearHover();
+        state.hover = nearest.point;
+        const alternateLines = bothUnitLines(nearest.point);
+        els.tooltip.innerHTML =
+          nearest.point.axis === "scatter"
+            ? `
+              <strong>${nearest.point.year}</strong>
+              <span>${nearest.point.xName}: ${fmt(nearest.point.xValue)} ${nearest.point.xUnit}</span>
+              <span>${nearest.point.name}: ${fmt(nearest.point.value)} ${nearest.point.unit}</span>
+              ${alternateLines}
+              <span>Source: ${nearest.point.source}</span>
+            `
+            : `
+              <strong>${nearest.point.name}</strong>
+              <span>Year: ${nearest.point.year}</span>
+              <span>Value: ${fmt(nearest.point.value)} ${nearest.point.unit}</span>
+              ${alternateLines}
+              <span>Axis: ${nearest.point.axis === "right" ? "Right y-axis" : "Left y-axis"}</span>
+              <span>Source: ${nearest.point.source}</span>
+            `;
+        els.tooltip.style.left = `${Math.min(mouse.cssX + 12, els.canvas.clientWidth - 292)}px`;
+        els.tooltip.style.top = `${Math.max(8, mouse.cssY - 12)}px`;
+        els.tooltip.classList.remove("hidden");
+        drawChart();
+      }
+
+      function clearHover() {
+        if (!state.hover) return;
+        state.hover = null;
+        els.tooltip.classList.add("hidden");
+        drawChart();
+      }
+
+      async function fetchIndicator(item) {
+        const response = await fetch(apiUrl(item));
+        if (!response.ok) throw new Error(item);
+        const payload = await response.json();
+        return (Array.isArray(payload) ? payload[1] || [] : [])
+          .filter((row) => row.value !== null && row.date)
+          .map((row) => makeRow(item, row.date, row.value, "World Bank WDI"));
+      }
+
+      async function loadData() {
+        try {
+          const data = await Promise.all(allCodes.map(fetchIndicator));
+          state.rows = data.flat().filter((row) => row.year >= 1960).sort((a, b) => a.year - b.year);
+          els.status.textContent = "Loaded official World Bank data for Nepal.";
+        } catch {
+          state.rows = fallbackRows;
+          els.status.textContent = "Showing fallback sample data because the World Bank API could not be reached.";
+        }
+
+        const years = state.rows.map((row) => row.year);
+        els.startYear.min = Math.min(...years);
+        els.startYear.max = Math.max(...years);
+        els.endYear.min = Math.min(...years);
+        els.endYear.max = Math.max(...years);
+        els.startYear.value = Math.max(2000, Math.min(...years));
+        els.endYear.value = Math.max(...years);
+
+        renderSources();
+        render();
+      }
+
+      $("select-all").onclick = () => {
+        state.selected = indicators.map((item) => item.id);
+        render();
+      };
+      $("select-core").onclick = () => {
+        state.selected = ["gdp", "growth", "inflation"];
+        render();
+      };
+      $("clear").onclick = () => {
+        state.selected = [];
+        render();
+      };
+      [els.chartType, els.compareMode, els.startYear, els.endYear].forEach((el) => el.addEventListener("input", render));
+      $("download-csv").onclick = downloadCsv;
+      $("download-png").onclick = downloadPng;
+      els.canvas.addEventListener("mousemove", hoverChart);
+      els.canvas.addEventListener("mouseleave", clearHover);
+
+      loadData();
+    </script>
+  </body>
+</html>

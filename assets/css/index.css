@@ -333,7 +333,7 @@
 }
 
 .pcard:hover .pcard-desc {
-  max-height: 120px;
+  max-height: 600px;
   opacity: 1;
   margin-top: 12px;
 }
@@ -462,7 +462,7 @@
 }
 
 .exp:hover .exp-note {
-  max-height: 120px;
+  max-height: 600px;
   opacity: 1;
   margin-top: 8px;
 }
