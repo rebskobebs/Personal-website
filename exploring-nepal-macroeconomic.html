@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nepal Macro Indicators — Sparsh Adhikari</title>
+    <title>Exploring Nepal's Macroeconomics — Sparsh Adhikari</title>
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+    <script>if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');</script>
+    <link rel="stylesheet" href="assets/vendor/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/site.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
@@ -19,7 +23,7 @@
       }
       button, input, select { font: inherit; cursor: pointer; }
 
-      .page { width: min(1180px, calc(100% - 28px)); margin: 0 auto; padding: 28px 0; }
+      .page { width: min(1180px, calc(100% - 28px)); margin: 0 auto; padding: calc(var(--nav-h) + 28px) 0 28px; }
 
       .panel, .hero {
         background: #ffffff;
@@ -187,9 +191,27 @@
     </style>
   </head>
   <body>
+    <header id="site-nav">
+      <a href="index.html" class="nav-logo">SA</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#experience">Experience</a></li>
+        <li><a href="index.html#courses">Courses</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="index.html" class="back-link" style="font-size:0.72rem;letter-spacing:0.06em;margin-right:8px;">
+          <i class="bi bi-arrow-left"></i> Back
+        </a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><i class="bi bi-moon"></i></button>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><i class="bi bi-list"></i></button>
+      </div>
+    </header>
+
     <div class="page">
       <header class="hero">
-        <h1>Nepal Macroeconomic Indicators</h1>
+        <h1>Exploring Nepal's Macroeconomics</h1>
         <p class="muted">
           Select macro indicators, compare them over time, and open the original World Bank dataset when needed.
           The page uses live World Bank data and falls back to sample data only if the API is unavailable.
@@ -1030,6 +1052,15 @@
       els.canvas.addEventListener("mouseleave", clearHover);
 
       loadData();
+    </script>
+    <script src="assets/js/theme.js"></script>
+    <script>
+      const navToggle = document.getElementById('navToggle');
+      const navLinks  = document.getElementById('navLinks');
+      navToggle.addEventListener('click', () => {
+        const open = navLinks.classList.toggle('open');
+        navToggle.innerHTML = open ? '<i class="bi bi-x-lg"></i>' : '<i class="bi bi-list"></i>';
+      });
     </script>
   </body>
 </html>
