@@ -137,7 +137,20 @@
         font-size: 0.7rem;
       }
 
-      .chart-wrap { position: relative; }
+      .chart-wrap {
+        position: relative;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .chart-wrap::after {
+        content: '';
+        position: absolute;
+        top: 0; right: 0; bottom: 0;
+        width: 40px;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.7));
+        pointer-events: none;
+        display: none;
+      }
       canvas {
         display: block;
         width: 100%;
@@ -185,7 +198,8 @@
       @media (max-width: 900px) {
         .grid, .summary { grid-template-columns: 1fr; }
         .filters { position: static; }
-        canvas { height: 300px; }
+        canvas { height: 340px; width: 660px; }
+        .chart-wrap::after { display: block; }
         .hero { padding: 20px; }
       }
     </style>
