@@ -144,25 +144,27 @@
         </div>
       </div>
 
-      <div id="blogs" class="proj-row">
+      <div id="blogsandarticles" class="proj-row">
         <div class="row-head">
-          <h3 class="row-name">Blogs</h3>
+          <h3 class="row-name">Blogs and Articles</h3>
           <div class="row-btns">
-            <button class="row-btn" onclick="scrollDock('d-blogs',-1)"><i class="bi bi-chevron-left"></i></button>
-            <button class="row-btn" onclick="scrollDock('d-blogs', 1)"><i class="bi bi-chevron-right"></i></button>
+            <button class="row-btn" onclick="scrollDock('d-blogsandarticles',-1)"><i class="bi bi-chevron-left"></i></button>
+            <button class="row-btn" onclick="scrollDock('d-blogsandarticles', 1)"><i class="bi bi-chevron-right"></i></button>
           </div>
         </div>
-        <div class="dock" id="d-blogs">
+        <div class="dock" id="d-blogsandarticles">
           <div class="pcard" role="button" tabindex="0" onclick="openModal('blog-modal-1')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('blog-modal-1')" style="cursor:pointer">
             <div class="pcard-tag">Gen Z Protest · Political Discontent</div>
             <div class="pcard-title">Longstanding political message ignored by political parties</div>
             <p class="pcard-desc">Drawing from fieldwork on emerging political discontent, this piece analyzes how the Gen Z uprising revealed deeper structural frustrations that parties had long overlooked.</p>
+            <div class="pcard-pub"><strong>The Annapurna Express</strong></div>
             <div class="pcard-foot"><span>Read more</span><i class="bi bi-arrow-up-right"></i></div>
           </div>
           <div class="pcard" role="button" tabindex="0" onclick="openModal('blog-modal-2')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('blog-modal-2')" style="cursor:pointer">
             <div class="pcard-tag">Labor Diplomacy · Migrant Workers · Gulf Migration</div>
             <div class="pcard-title">The Plight of Nepali Migrant Workers in the GCC</div>
             <p class="pcard-desc">Examining structural exploitation, diplomatic shortcomings, and policy failures, calling for a rights-based foreign policy and stronger embassy accountability.</p>
+            <div class="pcard-pub"><strong>National Policy Forum</strong></div>
             <div class="pcard-foot"><span>Read more</span><i class="bi bi-arrow-up-right"></i></div>
           </div>
         </div>
@@ -406,7 +408,7 @@
                 title="Research Poster" allowfullscreen loading="lazy"></iframe>
       </div>
       <div class="rmodal-foot">
-        <a href="#blogs" onclick="closeModal('research-modal')">
+        <a href="#blogsandarticles" onclick="closeModal('research-modal')">
           Related article published — see Blog section <i class="bi bi-arrow-down"></i>
         </a>
       </div>

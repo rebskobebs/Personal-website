@@ -141,7 +141,7 @@
       canvas {
         display: block;
         width: 100%;
-        height: 430px;
+        height: clamp(420px, 56vh, 700px);
         border: 1px solid rgba(17,17,17,0.09);
         background: #fff;
       }
@@ -185,7 +185,7 @@
       @media (max-width: 900px) {
         .grid, .summary { grid-template-columns: 1fr; }
         .filters { position: static; }
-        canvas { height: 350px; }
+        canvas { height: 300px; }
         .hero { padding: 20px; }
       }
     </style>
@@ -282,7 +282,7 @@
               </div>
             </div>
             <div class="chart-wrap">
-              <canvas id="chart" width="1200" height="620"></canvas>
+              <canvas id="chart"></canvas>
               <div id="tooltip" class="tooltip hidden"></div>
             </div>
           </div>
@@ -582,7 +582,7 @@
         ctx.translate(x, y);
         ctx.rotate(-Math.PI / 2);
         ctx.fillStyle = color;
-        ctx.font = "bold 14px sans-serif";
+        ctx.font = "bold 13px sans-serif";
         ctx.textAlign = "center";
         ctx.fillText(text, 0, 0);
         ctx.restore();
@@ -612,7 +612,7 @@
           return;
         }
 
-        const pad = { top: 54, right: 42, bottom: 92, left: 112 };
+        const pad = { top: 58, right: 46, bottom: 96, left: 120 };
         const plotW = w - pad.left - pad.right;
         const plotH = h - pad.top - pad.bottom;
         const xScale = scale(pairs.map((pair) => pair.xRow.displayValue));
@@ -635,17 +635,17 @@
 
         drawAxisNumbers(ctx, yScale, pad.left - 12, pad, plotH, "right");
         ctx.fillStyle = "#667085";
-        ctx.font = "13px sans-serif";
+        ctx.font = "12px sans-serif";
         ctx.textAlign = "center";
         for (let i = 0; i <= 5; i++) {
           const value = xScale.min + (i / 5) * (xScale.max - xScale.min);
-          ctx.fillText(fmt(value), pad.left + (i / 5) * plotW, h - 46);
+          ctx.fillText(fmt(value), pad.left + (i / 5) * plotW, h - 48);
         }
 
         ctx.fillStyle = "#344054";
-        ctx.font = "bold 14px sans-serif";
-        ctx.fillText(`${indicator(xId).name} (${activeUnit(indicator(xId))})`, pad.left + plotW / 2, h - 16);
-        rotateLabel(ctx, `${indicator(yId).name} (${activeUnit(indicator(yId))})`, 28, pad.top + plotH / 2, "#344054");
+        ctx.font = "bold 13px sans-serif";
+        ctx.fillText(`${indicator(xId).name} (${activeUnit(indicator(xId))})`, pad.left + plotW / 2, h - 18);
+        rotateLabel(ctx, `${indicator(yId).name} (${activeUnit(indicator(yId))})`, 30, pad.top + plotH / 2, "#344054");
         ctx.textAlign = "left";
 
         pairs.forEach((pair) => {
@@ -672,12 +672,14 @@
       }
 
       function drawChart() {
+        els.canvas.width = els.canvas.clientWidth;
+        els.canvas.height = els.canvas.clientHeight;
         const rows = displayRows();
         const config = axisConfig(rows);
         const ctx = els.canvas.getContext("2d");
         const w = els.canvas.width;
         const h = els.canvas.height;
-        const pad = { top: 54, right: config.dual ? 112 : 36, bottom: 82, left: 108 };
+        const pad = { top: 58, right: config.dual ? 120 : 40, bottom: 88, left: 116 };
         const plotW = w - pad.left - pad.right;
         const plotH = h - pad.top - pad.bottom;
         const years = [...new Set(rows.map((row) => row.year))].sort((a, b) => a - b);
@@ -726,12 +728,12 @@
         if (config.dual) rotateLabel(ctx, axisText(config.right), w - 24, pad.top + plotH / 2, colors[1]);
 
         ctx.fillStyle = "#667085";
-        ctx.font = "13px sans-serif";
-        years.forEach((year) => ctx.fillText(year, x(year) - 14, h - 26));
-        ctx.fillStyle = "#344054";
-        ctx.font = "bold 14px sans-serif";
+        ctx.font = "11px sans-serif";
         ctx.textAlign = "center";
-        ctx.fillText("Year", pad.left + plotW / 2, h - 12);
+        years.forEach((year) => ctx.fillText(year, x(year), h - 32));
+        ctx.fillStyle = "#344054";
+        ctx.font = "bold 13px sans-serif";
+        ctx.fillText("Year", pad.left + plotW / 2, h - 14);
         ctx.textAlign = "left";
 
         state.selected.forEach((id) => {
@@ -1048,6 +1050,7 @@
       $("download-png").onclick = downloadPng;
       els.canvas.addEventListener("mousemove", hoverChart);
       els.canvas.addEventListener("mouseleave", clearHover);
+      window.addEventListener("resize", drawChart);
 
       loadData();
 

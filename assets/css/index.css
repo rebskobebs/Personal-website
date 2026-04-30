@@ -338,6 +338,12 @@
   margin-top: 12px;
 }
 
+.pcard-pub {
+  margin-top: auto;
+  font-size: 0.78rem;
+  color: var(--muted2);
+}
+
 .pcard-foot {
   display: flex;
   align-items: center;
