@@ -250,7 +250,7 @@
             <label class="label" for="chart-type">Graph type</label>
             <select class="select" id="chart-type">
               <option value="line">Trend line over time</option>
-              <option value="latest-bar">Latest-year bar comparison</option>
+
               <option value="area">Area trend over time</option>
               <option value="scatter">Relationship scatterplot</option>
             </select>
@@ -761,28 +761,7 @@
           ctx.fillStyle = color;
           ctx.lineWidth = 3;
 
-          if (els.chartType.value === "latest-bar") {
-            const latestYear = Math.max(...years);
-            const latestRows = rows.filter((row) => row.year === latestYear);
-            const barW = Math.max(18, plotW / Math.max(latestRows.length * 1.6, 1));
-            series.forEach((row) => {
-              if (row.year !== latestYear) return;
-              const latestIndex = latestRows.findIndex((item) => item.id === row.id);
-              const bx = pad.left + latestIndex * barW * 1.45 + barW;
-              const by = yRow(row);
-              const base = yBase(row.id);
-              ctx.fillRect(bx, Math.min(by, base), barW, Math.max(2, Math.abs(base - by)));
-              ctx.fillStyle = "#344054";
-              ctx.font = "12px sans-serif";
-              ctx.save();
-              ctx.translate(bx + barW / 2, h - 34);
-              ctx.rotate(-Math.PI / 5);
-              ctx.fillText(indicator(row.id).name, 0, 0);
-              ctx.restore();
-              ctx.fillStyle = color;
-              state.points.push({ ...row, color, x: bx + barW / 2, y: by, axis: config.axisForId[row.id] });
-            });
-          } else {
+          {
             ctx.beginPath();
             series.forEach((row, i) => (i ? ctx.lineTo(x(row.year), yRow(row)) : ctx.moveTo(x(row.year), yRow(row))));
             ctx.stroke();
@@ -918,7 +897,7 @@
         const mixedUnits = new Set(state.selected.map((id) => activeUnit(indicator(id)))).size > 1;
         const chartDescriptions = {
           line: "Trend line: best for seeing direction over time.",
-          "latest-bar": "Latest-year bar: best for comparing the most recent available values.",
+
           area: "Area trend: useful for showing magnitude over time for one or a few indicators.",
           scatter: "Scatterplot: best for checking the relationship between exactly two indicators.",
         };
