@@ -333,7 +333,7 @@
       const colors = ["#1d4ed8", "#047857", "#b91c1c", "#7c3aed", "#c2410c", "#0f766e", "#be123c", "#4f46e5", "#a16207", "#0369a1"];
 
       const indicators = [
-        { id: "gdp", name: "GDP", why: "Size of the economy", percentCode: "NY.GDP.MKTP.CD", usdCode: "NY.GDP.MKTP.CD", percentUnit: "current US$", usdUnit: "current US$" },
+        { id: "gdp", name: "GDP", why: "Size of the economy", percentCode: "SYNTHETIC.GDP.PCT", usdCode: "NY.GDP.MKTP.CD", percentUnit: "% of GDP", usdUnit: "current US$" },
         { id: "growth", name: "GDP growth", why: "Real economic growth", percentCode: "NY.GDP.MKTP.KD.ZG", usdCode: "NY.GDP.MKTP.KD.ZG", percentUnit: "annual %", usdUnit: "annual %" },
         { id: "gdp_pc", name: "GDP per capita", why: "Average income level", percentCode: "NY.GDP.PCAP.CD", usdCode: "NY.GDP.PCAP.CD", percentUnit: "current US$", usdUnit: "current US$" },
         { id: "inflation", name: "Inflation", why: "Price stability", percentCode: "FP.CPI.TOTL.ZG", usdCode: "FP.CPI.TOTL.ZG", percentUnit: "annual %", usdUnit: "annual %" },
@@ -346,7 +346,7 @@
         { id: "reserves", name: "Foreign reserves", why: "External buffer stock", percentCode: "FI.RES.TOTL.CD", usdCode: "FI.RES.TOTL.CD", percentUnit: "current US$", usdUnit: "current US$" },
       ];
 
-      const allCodes = [...new Set(indicators.flatMap((item) => [item.percentCode, item.usdCode]))];
+      const allCodes = [...new Set(indicators.flatMap((item) => [item.percentCode, item.usdCode]).filter((code) => !code.startsWith("SYNTHETIC.")))];
 
       const fallbackRows = [
         ["NY.GDP.MKTP.CD", 2020, 33433416764], ["NY.GDP.MKTP.CD", 2021, 36924802842], ["NY.GDP.MKTP.CD", 2022, 40828247302], ["NY.GDP.MKTP.CD", 2023, 40908389452],
@@ -364,7 +364,7 @@
       const state = {
         rows: [],
         selected: ["gdp"],
-        units: {},
+        units: { gdp: "usd" },
         points: [],
         hover: null,
       };
@@ -823,6 +823,7 @@
           .slice(0, 6)
           .map((id) => {
             const item = indicator(id);
+            if (activeCode(item).startsWith("SYNTHETIC.")) return `<article class="panel metric"><h3>${item.name}</h3><strong>100</strong><p class="muted">% of GDP — constant reference</p></article>`;
             const code = activeCode(item);
             const series = state.rows.filter((row) => row.id === id && row.code === code);
             const last = series.at(-1);
@@ -850,14 +851,15 @@
 
       function renderSources() {
         els.sources.innerHTML = indicators
-          .map(
-            (item) => `
+          .map((item) => {
+            const code = activeCode(item).startsWith("SYNTHETIC.") ? item.usdCode : activeCode(item);
+            return `
               <li>
-                <a href="${dataUrl(activeCode(item))}" target="_blank" rel="noreferrer">${item.name}</a>
+                <a href="${dataUrl(code)}" target="_blank" rel="noreferrer">${item.name}</a>
                 <span class="muted"> - ${activeUnit(item)}</span>
               </li>
-            `,
-          )
+            `;
+          })
           .join("");
       }
 
@@ -1010,6 +1012,12 @@
           state.rows = fallbackRows;
           els.status.textContent = "Showing fallback sample data because the World Bank API could not be reached.";
         }
+
+        const availableYears = [...new Set(state.rows.map((r) => r.year))];
+        state.rows = [
+          ...state.rows,
+          ...availableYears.map((year) => ({ id: "gdp", code: "SYNTHETIC.GDP.PCT", year, value: 100, name: "GDP", unit: "% of GDP", source: "Synthetic" })),
+        ];
 
         const years = state.rows.map((row) => row.year);
         els.startYear.min = Math.min(...years);
