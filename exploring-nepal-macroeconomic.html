@@ -240,7 +240,7 @@
           <div class="section">
             <span class="label">Quick select</span>
             <div class="btn-row">
-              <button class="btn light" id="select-all">All 10</button>
+              <button class="btn light" id="select-all">All 11</button>
               <button class="btn light" id="select-core">Core 3</button>
               <button class="btn light" id="clear">Clear</button>
             </div>
@@ -343,6 +343,7 @@
         { id: "current_account", name: "Current account balance", why: "External surplus or deficit", percentCode: "BN.CAB.XOKA.GD.ZS", usdCode: "BN.CAB.XOKA.CD", percentUnit: "% of GDP", usdUnit: "current US$" },
         { id: "fdi", name: "FDI net inflows", why: "Foreign investment flow", percentCode: "BX.KLT.DINV.WD.GD.ZS", usdCode: "BX.KLT.DINV.CD.WD", percentUnit: "% of GDP", usdUnit: "current US$" },
         { id: "remittances", name: "Remittances received", why: "Household foreign income", percentCode: "BX.TRF.PWKR.DT.GD.ZS", usdCode: "BX.TRF.PWKR.CD.DT", percentUnit: "% of GDP", usdUnit: "current US$" },
+        { id: "reserves", name: "Foreign reserves", why: "External buffer stock", percentCode: "FI.RES.TOTL.CD", usdCode: "FI.RES.TOTL.CD", percentUnit: "current US$", usdUnit: "current US$" },
       ];
 
       const allCodes = [...new Set(indicators.flatMap((item) => [item.percentCode, item.usdCode]))];
@@ -480,14 +481,6 @@
           groupList[0].forEach((id) => (axisForId[id] = "left"));
           groupList.slice(1).flat().forEach((id) => (axisForId[id] = "right"));
           return { dual: true, axisForId, left: groupList[0], right: groupList.slice(1).flat() };
-        }
-
-        if (ids.length === 2) {
-          const ratio = maxAbs(rows, [ids[0]]) / Math.max(maxAbs(rows, [ids[1]]), 1);
-          if (ratio >= 25 || ratio <= 1 / 25) {
-            axisForId[ids[1]] = "right";
-            return { dual: true, axisForId, left: [ids[0]], right: [ids[1]] };
-          }
         }
 
         return { dual: false, axisForId, left: ids, right: [] };
