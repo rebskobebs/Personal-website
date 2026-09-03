@@ -69,11 +69,13 @@
             <h2 class="about-title">Research minded.<br>Data curious.<br>Philosophy geek.</h2>
             <div class="about-bio">
               <p>
-                I am currently working as a Georgetown's Center for Research and Fellowship’s Summer Research Fellow, conducting study on “Remittance 
-                and Household Consumption in Nepal” with Professor Lamis Kattan. I have also been working as a Student Finance 
-                Assistant in the GUQ Finance Office under the guidance of Director of Strategy and Process Improvement. I contributed to operational 
-                efficiency by supporting data visualization through Excel-based dashboards and help automate purchase requisition and quotation process
-                through Cflow. I also developed process documentation and guidebooks and videos to ensure effective system use for our automated systems.
+                I recently completed a Summer Research Fellowship with Georgetown's Center for Research and Fellowships, studying “Remittance
+                and Household Consumption in Nepal” with Professor Lamis Kattan, alongside a research internship at Nepal Rastra Bank's Economics
+                Research Department, contributing to research on remittances, macroeconomic indicators, and monetary policy at Nepal's central bank.
+                I currently work as a Finance Student Assistant in the GUQ Finance Office under the guidance of the Director of Strategy and Process
+                Improvement, supporting operational efficiency through Excel-based dashboards and automating purchase requisition and quotation
+                processes through Cflow, alongside developing process documentation and guidebooks for our automated systems. I am also starting as
+                a Research Assistant at HEC Paris in Qatar, supporting Professor Seungah Sarah Lee's research on entrepreneurialism and society.
               </p>
               <p>
                 I am interested in pursuing academic research and philosophical inquiries to understand the complex reality 
@@ -136,12 +138,12 @@
             <p class="pcard-desc">Tracing how growing urban discontent, declining party legitimacy, and alternative movements created the conditions for the Gen Z uprising.</p>
             <div class="pcard-foot"><span>Work in progress</span><i class="bi bi-clock"></i></div>
           </a>
-          <a class="pcard dim">
+          <div class="pcard" role="button" tabindex="0" onclick="openModal('remittance-modal')" onkeydown="if(event.key==='Enter'||event.key===' ')openModal('remittance-modal')" style="cursor:pointer">
             <div class="pcard-tag">Applied Econometrics · Remittance · Consumption</div>
             <div class="pcard-title">Remittance and Household Consumption in Nepal</div>
             <p class="pcard-desc">Examines how foreign remittances by amount and source country are associated with household per-capita consumption using NLSS-IV microdata.</p>
-            <div class="pcard-foot"><span>Work in progress</span><i class="bi bi-clock"></i></div>
-          </a>
+            <div class="pcard-foot"><span>View poster</span><i class="bi bi-arrow-up-right"></i></div>
+          </div>
         </div>
       </div>
 
@@ -185,6 +187,12 @@
             <div class="pcard-title">Exploring Nepal's Macroeconomic Indicators</div>
             <p class="pcard-desc">An interactive dashboard pulling live World Bank data for Nepal. Visualize GDP, inflation, remittances, trade, FDI and more across chart types with downloadable CSV and PNG exports.</p>
             <div class="pcard-foot"><span>Open dashboard</span><i class="bi bi-arrow-up-right"></i></div>
+          </a>
+          <a class="pcard" href="welfare-cost-analysis.html" target="_blank" rel="noopener">
+            <div class="pcard-tag">Quantitative Trade Models · Qatar Blockade · Welfare Analysis</div>
+            <div class="pcard-title">The Welfare Cost of the 2017 Qatar Blockade</div>
+            <p class="pcard-desc">A Quantitative Trade Models class project analyzing the welfare effects of the 2017 Qatar blockade, made in collaboration with my friend Azizbek.</p>
+            <div class="pcard-foot"><span>Open analysis</span><i class="bi bi-arrow-up-right"></i></div>
           </a>
           <a class="pcard dim">
             <div class="pcard-tag">Coming Soon</div>
@@ -281,22 +289,22 @@
             <div class="chap-num">Chapter III</div>
             <h3 class="chap-name">Research</h3>
             <div class="exp">
-              <div class="exp-when">Fall 2026 (upcoming)</div>
+              <div class="exp-when">Fall 2026 – Present</div>
               <div class="exp-role">Research Assistant</div>
               <div class="exp-org">HEC Paris in Qatar</div>
-              <p class="exp-note">Will support Prof. Seungah Sarah Lee's research on entrepreneurialism and society, examining how intermediary organizations broker access to networks and resources.</p>
+              <p class="exp-note">Supporting Prof. Seungah Sarah Lee's research on entrepreneurialism and society, examining how intermediary organizations broker access to networks and resources.</p>
             </div>
             <div class="exp">
               <div class="exp-when">Summer 2026</div>
               <div class="exp-role">Research Intern</div>
               <div class="exp-org">Nepal Rastra Bank – Economics Research Department</div>
-              <p class="exp-note">Contributing to research on remittances, macroeconomic indicators, and monetary policy at Nepal's central bank.</p>
+              <p class="exp-note">Contributed to research on remittances, macroeconomic indicators, and monetary policy at Nepal's central bank.</p>
             </div>
             <div class="exp">
               <div class="exp-when">Summer 2026</div>
               <div class="exp-role">CRF Research Fellow</div>
               <div class="exp-org">Center for Research and Fellowships, Georgetown University</div>
-              <p class="exp-note">Awarded a competitive fellowship for an independent study on foreign remittances and household consumption in Nepal.</p>
+              <p class="exp-note">Completed a competitive fellowship for an independent study on foreign remittances and household consumption in Nepal.</p>
             </div>
             <div class="exp">
               <div class="exp-when">Apr 2025 – Dec 2025</div>
@@ -412,6 +420,28 @@
         <a href="#blogsandarticles" onclick="closeModal('research-modal')">
           Related article published — see Blog section <i class="bi bi-arrow-down"></i>
         </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Remittance Research Poster Modal ── -->
+  <div id="remittance-modal" class="rmodal-bg" onclick="if(event.target===this)closeModal('remittance-modal')">
+    <div class="rmodal">
+      <div class="rmodal-bar">
+        <div class="rmodal-wip"><span class="rmodal-dot"></span>Study Complete</div>
+        <button class="rmodal-close" onclick="closeModal('remittance-modal')" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="rmodal-head">
+        <span class="label">Academic Research · Applied Econometrics</span>
+        <h2 class="rmodal-title">Remittance and Household Consumption in Nepal</h2>
+        <p class="rmodal-desc"></p>
+        <div class="rmodal-meta">
+          <span class="tag">Completed as a Georgetown Center for Research and Fellowships Summer Research Fellow with Professor Lamis Kattan, examining how foreign remittances by amount and source country are associated with household per-capita consumption using NLSS-IV microdata.</span>
+        </div>
+      </div>
+      <div class="rmodal-embed">
+        <iframe src="https://drive.google.com/file/d/1KkbKYfMNFpAxNbD6897vooolfk0m-_Rx/preview"
+                title="Remittance and Household Consumption in Nepal Poster" allowfullscreen loading="lazy"></iframe>
       </div>
     </div>
   </div>
