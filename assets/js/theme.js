@@ -1,4 +1,17 @@
 (function () {
+  // These pages are single documents with in-page anchor links (nav
+  // sections, table of contents), not separate pages. A reload should
+  // start fresh, not jump to whatever anchor was last clicked before you
+  // scrolled further on your own — so always land at the top on load.
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.addEventListener('load', function () {
+    window.scrollTo(0, 0);
+  });
+}());
+
+(function () {
   var btn = document.getElementById('themeToggle');
   if (!btn) return;
 

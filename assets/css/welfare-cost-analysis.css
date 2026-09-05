@@ -200,7 +200,7 @@ div.main-container {
   color: var(--muted2);
   background: transparent;
   border-color: var(--border);
-  font-size: 0.78rem;
+  font-size: inherit;
 }
 
 .tocify .list-group-item.active,
