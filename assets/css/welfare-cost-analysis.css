@@ -197,10 +197,25 @@ div.main-container {
 
 .tocify .list-group-item,
 .tocify .tocify-item a {
+  display: block;
   color: var(--muted2);
   background: transparent;
-  border-color: var(--border);
-  font-size: inherit;
+  border: 0 !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 11px 18px !important;
+  font-size: 0.85em;
+  line-height: 1.4 !important;
+}
+
+.tocify .tocify-subheader .list-group-item {
+  padding-left: 32px !important;
+  font-size: 0.8em;
+}
+
+.tocify .list-group-item + .list-group-item,
+.tocify .tocify-subheader {
+  border-top: 1px solid var(--border);
 }
 
 .tocify .list-group-item.active,
@@ -208,7 +223,6 @@ div.main-container {
 .tocify .list-group-item.active:focus {
   color: #fff;
   background: var(--amber);
-  border-color: var(--amber);
 }
 
 /* Only wide data tables scroll sideways — the page itself never should. */
