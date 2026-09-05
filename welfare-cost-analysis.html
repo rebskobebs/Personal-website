@@ -1583,6 +1583,7 @@ border-radius: 0px;
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
+<div class="toc-label">On this page</div>
 <div id="TOC" class="tocify">
 </div>
 </div>
@@ -1772,6 +1773,7 @@ cat(&quot;Sectors:&quot;, ModelData$S, &quot; Model regions:&quot;, ModelData$J,
   ),
   caption = &quot;Model regions&quot;, row.names = FALSE
 )</code></pre>
+<div class="table-scroll">
 <table>
 <caption>Model regions</caption>
 <thead>
@@ -1843,10 +1845,12 @@ cat(&quot;Sectors:&quot;, ModelData$S, &quot; Model regions:&quot;, ModelData$J,
 </tr>
 </tbody>
 </table>
+</div>
 <pre class="r"><code>if (!is.null(ModelData$sector_names)) {
   knitr::kable(ModelData$sector_names[1:ModelData$S, ],
                caption = &quot;Traded sectors and elasticities&quot;)
 }</code></pre>
+<div class="table-scroll">
 <table>
 <caption>Traded sectors and elasticities</caption>
 <thead>
@@ -1909,6 +1913,7 @@ cat(&quot;Sectors:&quot;, ModelData$S, &quot; Model regions:&quot;, ModelData$J,
 </tr>
 </tbody>
 </table>
+</div>
 <p>We include all six GCC states individually because the blockade
 divided the bloc. Qatar was the target while Saudi Arabia, the UAE, and
 Bahrain were the imposers, and Kuwait and Oman remained neutral. Egypt
@@ -1975,6 +1980,7 @@ wide &lt;- display %&gt;%
 
 knitr::kable(wide, digits = 3,
   caption = &quot;Welfare change (%) — key countries across scenarios&quot;)</code></pre>
+<div class="table-scroll">
 <table>
 <caption>Welfare change (%) — key countries across scenarios</caption>
 <colgroup>
@@ -2074,6 +2080,7 @@ knitr::kable(wide, digits = 3,
 </tbody>
 </table>
 </div>
+</div>
 <div id="consumption-equivalent-variation-cev" class="section level2">
 <h2>3.4 Consumption Equivalent Variation (CEV)</h2>
 <p>CEV measures welfare change using <strong>baseline
@@ -2087,6 +2094,7 @@ equals the standard welfare measure.</p>
 
 knitr::kable(cev_wide, digits = 3,
   caption = &quot;CEV (%) — consumption equivalent variation&quot;)</code></pre>
+<div class="table-scroll">
 <table>
 <caption>CEV (%) — consumption equivalent variation</caption>
 <colgroup>
@@ -2185,6 +2193,7 @@ knitr::kable(cev_wide, digits = 3,
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 <div id="welfare-chart" class="section level2">
 <h2>3.5 Welfare chart</h2>
@@ -2293,6 +2302,7 @@ for (c2 in all_countries) {
 actual_all &lt;- do.call(rbind, actual_list)
 knitr::kable(actual_all, 
   caption = &quot;Actual trade changes: Qatar vs all partners (2016 to 2019)&quot;)</code></pre>
+<div class="table-scroll">
 <table>
 <caption>Actual trade changes: Qatar vs all partners (2016 to
 2019)</caption>
@@ -2490,6 +2500,7 @@ knitr::kable(actual_all,
 </tr>
 </tbody>
 </table>
+</div>
 <p>The actual trade data reveals a divergence from the model’s
 assumptions. The model treats the blockade as a near-total shutdown of
 trade between Qatar and the blockading states. But the data shows that
@@ -2580,6 +2591,7 @@ total trade.</p>
   digits = 4,
   caption = &quot;Full results: wages and welfare changes&quot;
 )</code></pre>
+<div class="table-scroll">
 <table style="width:100%;">
 <caption>Full results: wages and welfare changes</caption>
 <colgroup>
@@ -2774,6 +2786,7 @@ total trade.</p>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 <div id="references" class="section level1">
 <h1>5. References</h1>
